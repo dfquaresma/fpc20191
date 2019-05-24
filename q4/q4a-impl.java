@@ -3,7 +3,7 @@ import java.util.Random;
 public class Main {
 
     public static void main(String args[]) {
-        System.out.println(gateway(5));
+        System.out.println("gateway=" + gateway(5));
     }
 
     public static int gateway(int numReplicas) {
