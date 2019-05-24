@@ -34,14 +34,14 @@ public class Main {
             try {
                 Thread.sleep(randomNumber * 1000); // Thread.sleep sleeps milliseconds
             } catch (InterruptedException e) {}
-            this.first.add(randomNumber);
+            this.first.set(randomNumber);
         }
     }
 
     public static class First {
         private int value;
 
-        public synchronized void add(int value) {
+        public synchronized void set(int value) {
             if (this.value == 0) {
                 this.value = value;
                 this.notifyAll();
