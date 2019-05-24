@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Main {
+class Main {
 
     public static void main(String args[]) {
         System.out.println(gateway(5));
@@ -25,7 +25,7 @@ public class Main {
 
         synchronized (sum) {
             try {
-                first.wait();
+                sum.wait();
             } catch (InterruptedException e) {}
             return sum.get();
         }
@@ -42,7 +42,7 @@ public class Main {
 
         public void run() {
             try {
-                for (int i = 0; i < numReplicas; i++) {
+                for (int i = 0; i < this.threads.length; i++) {
                     this.threads[i].join();
                     this.sum.notifyAll();
                 }
@@ -64,7 +64,7 @@ public class Main {
     }
 
     public static class Request implements Runnable {
-        private First sum;
+        private Sum sum;
         private int randomNumber;
 
         public Request (Sum sum) {
