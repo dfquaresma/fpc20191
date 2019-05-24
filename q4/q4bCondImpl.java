@@ -84,16 +84,20 @@ public class Main {
 
     public static class Sum {
         private int value;
+        private boolean timeout; 
 
         public synchronized void set(int value) {
             if (this.value == 0) {
                 this.value = value;
+                this.timeout = true;
                 this.notifyAll();
             }
         }
 
         public synchronized void add(int value) {
-            this.value += value;
+            if (!this.timeout) {
+                this.value += value;
+            }
         }
 
         public synchronized int get() {
