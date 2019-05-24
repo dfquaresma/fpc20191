@@ -45,7 +45,9 @@ class Main {
                 for (int i = 0; i < this.threads.length; i++) {
                     this.threads[i].join();
                 }
-                this.sum.notifyAll();
+                synchronized (this.sum) {
+                  this.sum.notifyAll();
+                }
             } catch (InterruptedException e) {}
         }
     }
