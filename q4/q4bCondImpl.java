@@ -59,7 +59,7 @@ public class Main {
         @Override
         public void run() {
             try {
-                Thread.sleep(8 * 1000); // Thread.sleep sleeps milliseconds
+                Thread.sleep(16 * 1000); // Thread.sleep sleeps milliseconds
             } catch (InterruptedException e) {}
             super.sum.set(-1);
         }
