@@ -21,14 +21,14 @@ public class Main {
         Joiner joiner = new Joiner(threads, semaphore);
         Thread joinerThread = new Thread(joiner, "joiner");
         joinerThread.start();
-        Timer timer = new Timer(semaphore);
+        Timer timer = new Timer(numReplicas, semaphore, sum);
         Thread timerThread = new Thread(timer, "timer");
         timerThread.start();
 
         try {
             semaphore.acquire();      
         } catch (InterruptedException e) {}
-        return sum.get();
+        return sum.getValue();
     }
     
     public static class Joiner implements Runnable {
@@ -51,19 +51,27 @@ public class Main {
     }
 
     public static class Timer implements Runnable {
+        private int threadNumber;
         private Semaphore semaphore;
         private Sum sum;
 
-        public Timer (Semaphore semaphore) {
+        public Timer(int threadNumber, Semaphore semaphore, Sum sum) {
+            this.threadNumber = threadNumber;
             this.semaphore = semaphore;
+            this.sum = sum;
         }
+
         @Override
         public void run() {
             try {
                 Thread.sleep(16 * 1000); // Thread.sleep sleeps milliseconds
             } catch (InterruptedException e) {}
-            this.sum.set(-1);
-            this.semaphore.release();
+            synchronized(this.sum) {
+                if (this.sum.getAdds() < this.threadNumber) {
+                  this.sum.set(-1);
+                  this.semaphore.release();
+                }
+            }
         }
     }
 
@@ -85,19 +93,26 @@ public class Main {
     }
 
     public static class Sum {
-        private int value;
+        private int value, adds;
+        private boolean timeout;
 
-        public synchronized void set(int value) {
-            if (this.value == 0) {
-                this.value = value;
+        public synchronized void add(int value) {
+            if (!this.timeout) {
+              this.value += value;
+              this.adds++;
             }
         }
 
-        public synchronized void add(int value) {
-            this.value += value;
+        public synchronized void set(int value) {
+            this.timeout = true;
+            this.value = value;
         }
 
-        public synchronized int get() {
+        public int getAdds() {
+            return this.adds;
+        }
+
+        public int getValue() {
             return this.value;
         }
     }  
