@@ -36,5 +36,5 @@ int gateway (int num_replicas) {
 int main (int argc, char *argv[]) {
     pthread_mutex_init(&mutex, NULL);
     pthread_cond_init(&first, NULL);
-    printf("gateway=%ld\n", gateway(5));
+    printf("gateway=%d\n", gateway(5));
 }

@@ -23,5 +23,5 @@ int gateway (int num_replicas) {
 }
 
 int main (int argc, char *argv[]) {
-    printf("gateway=%ld\n", gateway(5));
+    printf("gateway=%d\n", gateway(5));
 }
