@@ -61,9 +61,11 @@ public class Main {
 
     public static class First {
         private int value;
+        private boolean set;
 
         public synchronized void set(int value) {
-            if (this.value == 0) {
+            if (!this.set) {
+                this.set = true;
                 this.value = value;
                 this.notifyAll();
             }
