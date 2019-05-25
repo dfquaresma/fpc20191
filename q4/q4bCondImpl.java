@@ -16,18 +16,18 @@ public class Main {
             threads[i] = thread;
         }
 
+        Timer timer = new Timer(numReplicas, sum);
+        Thread timerThread = new Thread(timer, "timer");
+        timerThread.start();
         Joiner joiner = new Joiner(threads, sum);
         Thread joinerThread = new Thread(joiner, "joiner");
         joinerThread.start();
-        Timer timer = new Timer(sum);
-        Thread timerThread = new Thread(timer, "timer");
-        timerThread.start();
 
         synchronized (sum) {
-            try {
-                sum.wait();
-            } catch (InterruptedException e) {}
-            return sum.get();
+          try {
+            sum.wait();
+          } catch (InterruptedException e) {}
+          return sum.getValue();
         }
     }
     
@@ -53,9 +53,11 @@ public class Main {
     }
 
     public static class Timer implements Runnable {
+        private int threadNumber;
         private Sum sum;
 
-        public Timer(Sum sum) {
+        public Timer(int threadNumber, Sum sum) {
+            this.threadNumber = threadNumber;
             this.sum = sum;
         }
 
@@ -64,7 +66,12 @@ public class Main {
             try {
                 Thread.sleep(16 * 1000); // Thread.sleep sleeps milliseconds
             } catch (InterruptedException e) {}
-            this.sum.set(-1);
+            synchronized(this.sum) {
+              if (this.sum.getAdds() < this.threadNumber) {
+                this.sum.set(-1);
+                this.sum.notifyAll();
+              }
+            }
         }
     }
 
@@ -86,24 +93,26 @@ public class Main {
     }
 
     public static class Sum {
-        private int value;
-        private boolean timeout; 
-
-        public synchronized void set(int value) {
-            if (this.value == 0) {
-                this.value = value;
-                this.timeout = true;
-                this.notifyAll();
-            }
-        }
+        private int value, adds;
+        private boolean timeout;
 
         public synchronized void add(int value) {
             if (!this.timeout) {
-                this.value += value;
+              this.value += value;
+              this.adds++;
             }
         }
 
-        public synchronized int get() {
+        public synchronized void set(int value) {
+            this.timeout = true;
+            this.value = value;
+        }
+
+        public int getAdds() {
+            return this.adds;
+        }
+
+        public int getValue() {
             return this.value;
         }
     }  
