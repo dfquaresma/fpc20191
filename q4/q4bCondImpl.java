@@ -52,16 +52,19 @@ public class Main {
         }
     }
 
-    public static class Timer extends Request implements Runnable {
+    public static class Timer implements Runnable {
+        private Sum sum;
+
         public Timer(Sum sum) {
-            super(sum);
+            this.sum = sum;
         }
+
         @Override
         public void run() {
             try {
                 Thread.sleep(16 * 1000); // Thread.sleep sleeps milliseconds
             } catch (InterruptedException e) {}
-            super.sum.set(-1);
+            this.sum.set(-1);
         }
     }
 

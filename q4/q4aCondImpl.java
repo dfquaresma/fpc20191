@@ -26,16 +26,19 @@ public class Main {
         }
     }
 
-    public static class Timer extends Request implements Runnable {
+    public static class Timer implements Runnable {
+        private First first;
+
         public Timer(First first) {
-          super(first);
+            this.first = first;
         }
+        
         @Override
         public void run() {
             try {
                 Thread.sleep(8 * 1000); // Thread.sleep sleeps milliseconds
             } catch (InterruptedException e) {}
-            super.first.set(-1);
+            this.first.set(-1);
         }
     }
 
