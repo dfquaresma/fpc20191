@@ -8,7 +8,7 @@ pthread_mutex_t mutex;
 int numberOfThreads = 5;
 int firstToWake = 0;
 
-void* timer (void* args) {
+void *timer (void *args) {
     sleep(8); // Sleeps seconds
     pthread_mutex_lock(&mutex);
     if (firstToWake == 0) {
@@ -19,7 +19,7 @@ void* timer (void* args) {
     pthread_exit(NULL);
 }
 
-void* request (void* args) {
+void *request (void *args) {
     int random_number = (rand() % 30) + 1; // // Obtain a number between [1 - 30].
     sleep(random_number); // Sleeps seconds
 

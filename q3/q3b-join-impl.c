@@ -2,7 +2,7 @@
 #include <assert.h>
 #include <pthread.h>
 
-void* request (void* args) {
+void *request (void *args) {
     int random_number = (rand() % 30) + 1; // // Obtain a number between [1 - 30].
     sleep(random_number); // Sleeps seconds
     pthread_exit(random_number);

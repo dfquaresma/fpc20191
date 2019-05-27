@@ -10,7 +10,7 @@ int numberOfThreads = 5;
 int threadsFinished = 0;
 int sum = 0;
 
-void* joiner (void* args) {
+void *joiner (void *args) {
     for (int i = 0; i < numberOfThreads; i++) {
         pthread_join(&pthreads[i], NULL);
     }
@@ -18,7 +18,7 @@ void* joiner (void* args) {
     pthread_exit(NULL);
 }
 
-void* timer (void* args) {
+void *timer (void *args) {
     sleep(16); // Sleeps seconds
     pthread_mutex_lock(&mutex);
     if (threadsFinished < numberOfThreads) {
@@ -29,7 +29,7 @@ void* timer (void* args) {
     pthread_exit(NULL);
 }
 
-void* request (void* args) {
+void *request (void *args) {
     int random_number = (rand() % 30) + 1; // // Obtain a number between [1 - 30].
     sleep(random_number); // Sleeps seconds
 

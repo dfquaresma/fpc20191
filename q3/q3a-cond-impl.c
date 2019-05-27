@@ -6,7 +6,7 @@ pthread_mutex_t mutex;
 pthread_cond_t first;
 int firstToWake = 0;
 
-void* request (void* args) {
+void *request (void *args) {
     int random_number = (rand() % 30) + 1; // // Obtain a number between [1 - 30].
     sleep(random_number); // Sleeps seconds
 

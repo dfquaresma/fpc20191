@@ -5,7 +5,7 @@
 pthread_mutex_t mutex;
 long int counter = 0;
 
-void* run (void* args) {
+void *run (void *args) {
     int my_id;
     long int j;
 
