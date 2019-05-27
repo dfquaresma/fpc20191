@@ -12,7 +12,7 @@ int sum = 0;
 
 void *joiner (void *args) {
     for (int i = 0; i < numberOfThreads; i++) {
-        pthread_join(&pthreads[i], NULL);
+        pthread_join(pthreads[i], NULL);
     }
     sem_post(&semaphore);
     pthread_exit(NULL);

@@ -16,7 +16,7 @@ int gateway (int num_replicas) {
     int sum = 0;
     for (int i = 0; i < num_replicas; i++) {
         int aux;
-        pthread_join(&pthreads[i], &aux);
+        pthread_join(pthreads[i], &aux);
         sum += aux;
     }
     return sum;
