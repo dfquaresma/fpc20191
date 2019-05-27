@@ -29,7 +29,7 @@ public class Main {
             int count = 0;
             while (true) {
                 this.channel.putMessage(Integer.toString(++count));
-                System.out.println("Producer put message " + count + ", time stamp: " + System.nanoTime());
+                System.out.println("Producer put message " + count + ", timestamp: " + System.nanoTime());
             }
         }
     }
@@ -44,7 +44,7 @@ public class Main {
         public void run() {
             while (true) {
                 String msg = this.channel.takeMessage();
-                System.out.println("Consumer take message " + msg + ", time stamp: " + System.nanoTime());
+                System.out.println("Consumer take message " + msg + ", timestamp: " + System.nanoTime());
             }
         }
     }
