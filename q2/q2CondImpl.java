@@ -2,65 +2,80 @@
 public class Main {
 
     public static void main(String args[]) {
-        Channel channel = new ConcurrentChannel(5);
-        Producer producer = new Producer(channel);
-        Consumer consumer = new Consumer(channel);
+        int channelSize = 3;
+        Channel channel = new ConcurrentChannel(channelSize);
 
-        Thread producerThread = new Thread(producer, "Producer");
-        Thread consumerThread = new Thread(consumer, "Consumer");
-        producerThread.start();
-        consumerThread.start();
+        int numberOfConsumerThreads = 2;
+        int numberOfProducerThreads = 2;
+        int totalNumberOfThreads = numberOfConsumerThreads + numberOfProducerThreads;
+        Thread[] threads = new Thread[totalNumberOfThreads];
+        for (int i = 0; i < numberOfConsumerThreads; i++) {
+            Consumer consumer = new Consumer(i, channel);
+            Thread consumerThread = new Thread(consumer, "Consumer" + i);
+            threads[i] = consumerThread;
+        }
+        for (int i = numberOfConsumerThreads; i < totalNumberOfThreads; i++) {
+            Producer producer = new Producer(i, channel);
+            Thread producerThread = new Thread(producer, "Producer" + i);
+            threads[i] = producerThread;
+        }        
+        for (int i = 0; i < totalNumberOfThreads; i++) {
+            threads[i].start();
+        }
 
         try {
-            producerThread.join();
-            consumerThread.join();
-
+            for (int i = 0; i < totalNumberOfThreads; i++) {
+                threads[i].join();
+            }
         } catch (InterruptedException e) {}
     }
 
     public static class Producer implements Runnable {
         private final Channel channel;
+        private final int id;
 
-        public Producer(Channel channel) {
+        public Producer(int id, Channel channel) {
             this.channel = channel;
+            this.id = id;
         }
 
         public void run() {
             int count = 0;
-            while (true) {
-                this.channel.putMessage(Integer.toString(++count));
-                System.out.println("Producer put message " + count + ", time stamp: " + System.nanoTime());
+            while (count++ < 5) {
+                this.channel.putMessage(this.id + " " + Integer.toString(count));
             }
         }
     }
     
     public static class Consumer implements Runnable {
         private final Channel channel;
-
-        public Consumer(Channel channel) {
+        private final int id;
+        
+        public Consumer(int id, Channel channel) {
             this.channel = channel;
+            this.id = id;
         }
-
+        
         public void run() {
-            while (true) {
+            int count = 0;
+            while (count++ < 5) {
                 String msg = this.channel.takeMessage();
-                System.out.println("Consumer take message " + msg + ", time stamp: " + System.nanoTime());
             }
         }
     }
-
+    
     public interface Channel {
         public void putMessage(String message);
         public String takeMessage();
     }
     
     public static class ConcurrentChannel implements Channel {
-        private ChannelData data;
-
+        private final ChannelData data;
+        
         public ConcurrentChannel(int maxSize) {
             this.data = new ChannelData(maxSize);
         }
-
+        
         public void putMessage(String message) {
             synchronized (this.data) {
                 while (this.data.isFull()) {
@@ -68,19 +83,20 @@ public class Main {
                         this.data.wait();
                     } catch (InterruptedException e) { }
                 }
-    
+                
                 try {
                     this.data.put(message);
+                    System.out.println("Put message " + message + ", time stamp: " + System.nanoTime());
                     
                 } catch (Exception e) {
                     throw e;
-    
+                    
                 } finally {
                     this.data.notifyAll();
                 }
             }
         }
-
+        
         public String takeMessage() {
             synchronized (this.data) {
                 while (this.data.isEmpty()) {
@@ -88,10 +104,12 @@ public class Main {
                         this.data.wait();
                     } catch (InterruptedException e) { }
                 }
-    
-                try {
-                    return this.data.get();
                 
+                try {
+                    String message = this.data.get();
+                    System.out.println("Take message " + message + ", time stamp: " + System.nanoTime());
+                    return message;
+
                 } catch (Exception e) {
                     throw e;
     
@@ -111,7 +129,7 @@ public class Main {
                 this.head = this.tail = this.size = 0;
             }
 
-            private void put(String message) {
+            private synchronized void put(String message) {
                 if (isFull()) {
                     throw new RuntimeException("ChannelData full and put called!");
                 }
@@ -120,7 +138,7 @@ public class Main {
                 this.tail = (this.tail + 1) % this.maxSize;
             }
     
-            private String get() {
+            private synchronized String get() {
                 if (isEmpty()) {
                     throw new RuntimeException("ChannelData empty and get called!");
                 }
@@ -130,11 +148,11 @@ public class Main {
                 return this.data[aux];
             }
 
-            private boolean isEmpty() {
+            private synchronized boolean isEmpty() {
                 return this.size == 0;
             } 
     
-            private boolean isFull() {
+            private synchronized boolean isFull() {
                 return this.size == this.maxSize;
             } 
         }
