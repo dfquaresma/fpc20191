@@ -8,8 +8,8 @@ public class Main {
 
     public static int gateway(int numReplicas) {
         First first = new First();
+        Request request = new Request(first);
         for (int i = 0; i < numReplicas; i++) {
-            Request request = new Request(first);
             Thread thread = new Thread(request, "request" + i);
             thread.start();
         }
@@ -19,10 +19,12 @@ public class Main {
         timerThread.start();
     
         synchronized (first) {
-            try {
-                first.wait();
-            } catch (InterruptedException e) {}
-            return first.get();
+            while (!first.isSet()) {
+                try {
+                    first.wait();
+                } catch (InterruptedException e) {}
+            }
+            return first.getValue();
         }
     }
 
@@ -36,34 +38,35 @@ public class Main {
         @Override
         public void run() {
             try {
+                System.out.println("Timer will sleep 8 seconds.");
                 Thread.sleep(8 * 1000); // Thread.sleep sleeps milliseconds
             } catch (InterruptedException e) {}
-            this.first.set(-1);
+            this.first.setValue(-1);
         }
     }
 
     public static class Request implements Runnable {
         private First first;
-        private int randomNumber;
 
         public Request (First first) {
-            this.first = first;
-            this.randomNumber = (new Random()).nextInt(30) + 1; // Obtain a number between [1 - 30]. 
+            this.first = first; 
         }
 
         public void run() {
+            int randomNumber = (new Random()).nextInt(30) + 1; // Obtain a number between [1 - 30].
             try {
-                Thread.sleep(this.randomNumber * 1000); // Thread.sleep sleeps milliseconds
+                System.out.println("Request will sleep " + randomNumber + " seconds.");
+                Thread.sleep(randomNumber * 1000); // Thread.sleep sleeps milliseconds
             } catch (InterruptedException e) {}
-            this.first.set(this.randomNumber);
+            this.first.setValue(randomNumber);
         }
     }
 
     public static class First {
-        private int value;
         private boolean set;
+        private int value;
 
-        public synchronized void set(int value) {
+        public synchronized void setValue(int value) {
             if (!this.set) {
                 this.set = true;
                 this.value = value;
@@ -71,8 +74,12 @@ public class Main {
             }
         }
 
-        public synchronized int get() {
+        public synchronized int getValue() {
             return this.value;
+        }
+
+        public synchronized boolean isSet() {
+            return this.set;
         }
     }  
 
