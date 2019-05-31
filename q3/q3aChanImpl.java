@@ -27,7 +27,7 @@ public class Main {
         public void run() {
             int randomNumber = (new Random()).nextInt(30) + 1; // Obtain a number between [1 - 30].
             try {
-                System.out.println("Request will sleep " + randomNumber + " seconds.");
+                System.out.printf("Request will sleep %d seconds.\n", randomNumber);
                 Thread.sleep(randomNumber * 1000); // Thread.sleep sleeps milliseconds
             } catch (InterruptedException e) {}
             this.channel.putMessage(randomNumber);

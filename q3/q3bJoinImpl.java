@@ -20,7 +20,7 @@ public class Main {
             System.out.println("Joiner waititng...");
             for (int i = 0; i < numReplicas; i++) {
                 threads[i].join();
-                System.out.println("Thread " + threads[i].getName() + " finished.");
+                System.out.printf("Thread %d finished.\n", threads[i].getName());
             }
         } catch (InterruptedException e) {}
         return sum.get();
@@ -35,8 +35,8 @@ public class Main {
 
         public void run() {
             int randomNumber = (new Random()).nextInt(30) + 1; // Obtain a number between [1 - 30].
-            try {
-                System.out.println("Request will sleep " + randomNumber + " seconds.");
+            try {                
+                System.out.printf("Request will sleep %d seconds.\n", randomNumber);
                 Thread.sleep(randomNumber * 1000); // Thread.sleep sleeps milliseconds
             } catch (InterruptedException e) {}
             this.sum.add(randomNumber);

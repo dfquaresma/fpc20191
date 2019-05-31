@@ -86,7 +86,7 @@ public class Main {
                 
                 try {
                     this.data.put(message);
-                    System.out.println("Put message " + message + ", timestamp: " + System.nanoTime());
+                    System.out.printf("Put message %s, timestamp: %d\n", message, System.nanoTime());
                     
                 } catch (Exception e) {
                     throw e;
@@ -107,7 +107,7 @@ public class Main {
                 
                 try {
                     String message = this.data.get();
-                    System.out.println("Take message " + message + ", timestamp: " + System.nanoTime());
+                    System.out.printf("Take message %s, timestamp: %d\n", message, System.nanoTime());
                     return message;
 
                 } catch (Exception e) {

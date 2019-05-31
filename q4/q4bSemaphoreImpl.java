@@ -48,7 +48,7 @@ public class Main {
                 System.out.println("Joiner waititng...");
                 for (int i = 0; i < this.threads.length; i++) {                
                     this.threads[i].join();
-                    System.out.println("Thread " + this.threads[i].getName() + " finished.");
+                    System.out.printf("Thread %d finished.\n", this.threads[i].getName());
                 }
             } catch (InterruptedException e) {}
             this.semaphore.release();
@@ -89,7 +89,7 @@ public class Main {
         public void run() {
             int randomNumber = (new Random()).nextInt(30) + 1; // Obtain a number between [1 - 30].
             try {
-                System.out.println("Request will sleep " + randomNumber + " seconds.");
+                System.out.printf("Request will sleep %d seconds.\n", randomNumber);
                 Thread.sleep(randomNumber * 1000); // Thread.sleep sleeps milliseconds
             } catch (InterruptedException e) {}
             this.sum.add(randomNumber);
