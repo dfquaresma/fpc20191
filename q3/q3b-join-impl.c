@@ -7,7 +7,7 @@ int numberOfThreads = 5;
 
 void *request (void *args) {
     int random_number = (rand() % 30) + 1; // // Obtain a number between [1 - 30].
-    printf("Request will slept %d seconds\n", random_number);
+    printf("Request will sleep %d seconds\n", random_number);
     sleep(random_number); // Sleeps seconds
     pthread_exit(random_number);
 }
@@ -23,7 +23,7 @@ int gateway (int num_replicas) {
     for (int i = 0; i < num_replicas; i++) {
         void* aux;
         pthread_join(pthreads[i], &aux);    
-        printf("Thread %d finished. It sleeped %d seconds.\n", i, (int) aux);
+        printf("Thread %d finished. It slept %d seconds.\n", i, (int) aux);
         sum += (int) aux;
     }
     return sum;
