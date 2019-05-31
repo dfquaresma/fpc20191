@@ -6,24 +6,22 @@
 
 sem_t semaphore;
 pthread_mutex_t mutex;
-pthread_t pthreads[5];
 int numberOfThreads = 5;
-int threadsFinished = 0;
-int sum = 0;
+int sleep_sum = 0;
 
-void *joiner (void *args) {
+void *joiner (pthread_t *pthreads[]) {
     int joiner_sum = 0;
     printf("Joiner waiting...\n");
     for (int i = 0; i < numberOfThreads; i++) {
         int aux = 0;
-        pthread_join(pthreads[i], &aux);    
+        pthread_join(*pthreads[i], &aux);    
         printf("Thread %d finished.\n", i);
         joiner_sum += aux;        
     }
 
     pthread_mutex_lock(&mutex);
-    if (sum != -1) {
-        sum = joiner_sum;
+    if (sleep_sum != -1) {
+        sleep_sum = joiner_sum;
     }
     sem_post(&semaphore);
     pthread_mutex_unlock(&mutex);
@@ -31,13 +29,13 @@ void *joiner (void *args) {
     pthread_exit(NULL);
 }
 
-void *timer (void *args) {
+void *timer (int *number_of_threads_running) {
     printf("Timer will sleep 16 seconds.\n");
     sleep(16); // Sleeps seconds
 
     pthread_mutex_lock(&mutex);
-    if (threadsFinished < numberOfThreads) {
-        sum = -1;
+    if (*number_of_threads_running > 0) {
+        sleep_sum = -1;
     }
     sem_post(&semaphore);
     pthread_mutex_unlock(&mutex);
@@ -45,31 +43,33 @@ void *timer (void *args) {
     pthread_exit(NULL);
 }
 
-void *request (void *args) {
+void *request (int *number_of_threads_running) {
     int random_number = (rand() % 30) + 1; // // Obtain a number between [1 - 30].
     printf("Request will sleep %d seconds\n", random_number);
     sleep(random_number); // Sleeps seconds  
     
     pthread_mutex_lock(&mutex);
-    threadsFinished++; 
+    *number_of_threads_running = *number_of_threads_running - 1; // Short -- does not work...
     pthread_mutex_unlock(&mutex);  
     
     pthread_exit(random_number);
 }
 
 int gateway (int num_replicas) {
+    pthread_t *pthreads[5];
+    int *number_of_threads_running = num_replicas;
     for (int i = 0; i < num_replicas; i++) {
-        pthread_create (&pthreads[i], NULL, &request, (void*) i);
+        pthread_create (&pthreads[i], NULL, &request, &number_of_threads_running);
     }
 
     pthread_t joinerThread;
-    pthread_create(&joinerThread, NULL, &joiner, NULL);
+    pthread_create(&joinerThread, NULL, &joiner, &pthreads);
     pthread_t timerThread;
-    pthread_create(&timerThread, NULL, &timer, NULL);
+    pthread_create(&timerThread, NULL, &timer, &number_of_threads_running);
 
     sem_wait(&semaphore);
     pthread_mutex_lock(&mutex);
-    int sumValue = sum;
+    int sumValue = sleep_sum;
     pthread_mutex_unlock(&mutex);
     return sumValue;
 }
