@@ -17,7 +17,7 @@ public class Main {
         }
 
         try {
-            System.out.println("Joiner waititng...");
+            System.out.println("Joiner waiting...");
             for (int i = 0; i < numReplicas; i++) {
                 threads[i].join();
                 System.out.printf("Thread %s finished.\n", threads[i].getName());
