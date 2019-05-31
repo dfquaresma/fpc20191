@@ -10,20 +10,23 @@ public class Main {
     public static int gateway(int numReplicas) {
         Sum sum = new Sum();
         Thread[] threads = new Thread[numReplicas];
+        Request request = new Request(sum);
         for (int i = 0; i < numReplicas; i++) {
-            Request request = new Request(sum);
             Thread thread = new Thread(request, "request" + i);
-            thread.start();
             threads[i] = thread;
         }
         
         Semaphore semaphore = new Semaphore(0);
         Joiner joiner = new Joiner(threads, semaphore);
         Thread joinerThread = new Thread(joiner, "joiner");
-        joinerThread.start();
         Timer timer = new Timer(numReplicas, semaphore, sum);
         Thread timerThread = new Thread(timer, "timer");
-        timerThread.start();
+        
+        timerThread.start();        
+        for(Thread thread: threads){
+            thread.start();
+        }
+        joinerThread.start();
 
         try {
             semaphore.acquire();      
@@ -42,17 +45,19 @@ public class Main {
 
         public void run() {
             try {
-                for (int i = 0; i < this.threads.length; i++) {
+                System.out.println("Joiner waititng...");
+                for (int i = 0; i < this.threads.length; i++) {                
                     this.threads[i].join();
+                    System.out.println("Thread " + this.threads[i].getName() + " finished.");
                 }
-                this.semaphore.release();
             } catch (InterruptedException e) {}
+            this.semaphore.release();
         }
     }
 
     public static class Timer implements Runnable {
-        private int threadNumber;
         private Semaphore semaphore;
+        private int threadNumber;
         private Sum sum;
 
         public Timer(int threadNumber, Semaphore semaphore, Sum sum) {
@@ -64,55 +69,54 @@ public class Main {
         @Override
         public void run() {
             try {
+                System.out.println("Timer will sleep 16 seconds.");
                 Thread.sleep(16 * 1000); // Thread.sleep sleeps milliseconds
             } catch (InterruptedException e) {}
-            synchronized(this.sum) {
-                if (this.sum.getAdds() < this.threadNumber) {
-                  this.sum.set(-1);
-                  this.semaphore.release();
-                }
+            if (this.sum.getAddsCount() < this.threadNumber) {
+              this.sum.setTimeout();
             }
+            this.semaphore.release();
         }
     }
 
     public static class Request implements Runnable {
         private Sum sum;
-        private int randomNumber;
 
         public Request (Sum sum) {
-            this.sum = sum;
-            this.randomNumber = (new Random()).nextInt(30) + 1; // Obtain a number between [1 - 30]. 
+            this.sum = sum; 
         }
 
         public void run() {
+            int randomNumber = (new Random()).nextInt(30) + 1; // Obtain a number between [1 - 30].
             try {
-                Thread.sleep(this.randomNumber * 1000); // Thread.sleep sleeps milliseconds
+                System.out.println("Request will sleep " + randomNumber + " seconds.");
+                Thread.sleep(randomNumber * 1000); // Thread.sleep sleeps milliseconds
             } catch (InterruptedException e) {}
-            this.sum.add(this.randomNumber);
+            this.sum.add(randomNumber);
         }
     }
 
     public static class Sum {
-        private int value, adds;
+        private int value, addsCount;
         private boolean timeout;
 
         public synchronized void add(int value) {
             if (!this.timeout) {
-              this.value += value;
-              this.adds++;
+                this.addsCount++;
+                this.value += value;
             }
         }
 
-        public synchronized void set(int value) {
+        public synchronized void setTimeout() {
             this.timeout = true;
-            this.value = value;
+            this.value = -1;
         }
 
-        public int getAdds() {
-            return this.adds;
+        public synchronized int getAddsCount() {
+            return this.addsCount;
         }
 
-        public int getValue() {
+        public synchronized int getValue() {
             return this.value;
         }
     }  
