@@ -48,7 +48,7 @@ public class Main {
                 System.out.println("Joiner waititng...");
                 for (int i = 0; i < this.threads.length; i++) {                
                     this.threads[i].join();
-                    System.out.printf("Thread %d finished.\n", this.threads[i].getName());
+                    System.out.printf("Thread %s finished.\n", this.threads[i].getName());
                 }
             } catch (InterruptedException e) {}
             this.semaphore.release();

@@ -20,7 +20,7 @@ public class Main {
             System.out.println("Joiner waititng...");
             for (int i = 0; i < numReplicas; i++) {
                 threads[i].join();
-                System.out.printf("Thread %d finished.\n", threads[i].getName());
+                System.out.printf("Thread %s finished.\n", threads[i].getName());
             }
         } catch (InterruptedException e) {}
         return sum.get();
