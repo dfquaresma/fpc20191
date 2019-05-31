@@ -7,15 +7,14 @@
 sem_t semaphore;
 pthread_mutex_t mutex;
 int numberOfThreads = 5;
-int first_to_wake_value = 0;
 
-void *timer (void *args) {
+void *timer (int *first_to_wake_value) {
     printf("Timer will sleep 8 seconds.\n");
     sleep(8); // Sleeps seconds
 
     pthread_mutex_lock(&mutex);
-    if (first_to_wake_value == 0) {
-        first_to_wake_value = -1;
+    if (*first_to_wake_value == 0) {
+        *first_to_wake_value = -1;
     }
     sem_post(&semaphore);
     pthread_mutex_unlock(&mutex);
@@ -23,14 +22,14 @@ void *timer (void *args) {
     pthread_exit(NULL);
 }
 
-void *request (void *args) {
+void *request (int *first_to_wake_value) {
     int random_number = (rand() % 30) + 1; // // Obtain a number between [1 - 30].
     printf("Request will sleep %d seconds\n", random_number);
     sleep(random_number); // Sleeps seconds
 
     pthread_mutex_lock(&mutex);
-    if (first_to_wake_value == 0) {
-        first_to_wake_value = random_number;
+    if (*first_to_wake_value == 0) {
+        *first_to_wake_value = random_number;
     }
     sem_post(&semaphore);
     pthread_mutex_unlock(&mutex);
@@ -39,16 +38,17 @@ void *request (void *args) {
 }
 
 int gateway (int num_replicas) {
+    int *first_to_wake_value = 0;
     pthread_t pthreads[num_replicas];
     for (int i = 0; i < num_replicas; i++) {
-        pthread_create(&pthreads[i], NULL, &request, (void*) i);
+        pthread_create(&pthreads[i], NULL, &request, &first_to_wake_value);
     }
     pthread_t timerThread;
-    pthread_create(&timerThread, NULL, &timer, NULL);
+    pthread_create(&timerThread, NULL, &timer, &first_to_wake_value);
 
     sem_wait(&semaphore);
     pthread_mutex_lock(&mutex);
-    int valueToReturn = first_to_wake_value;
+    int valueToReturn = *first_to_wake_value;
     pthread_mutex_unlock(&mutex);
     return valueToReturn;
 }
