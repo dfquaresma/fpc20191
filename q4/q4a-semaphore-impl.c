@@ -44,7 +44,7 @@ int gateway (int num_replicas) {
         pthread_create(&pthreads[i], NULL, &request, &first_to_wake_value);
     }
     pthread_t timerThread;
-    //pthread_create(&timerThread, NULL, &timer, &first_to_wake_value);
+    pthread_create(&timerThread, NULL, &timer, &first_to_wake_value);
 
     sem_wait(&semaphore);
     pthread_mutex_lock(&mutex);
