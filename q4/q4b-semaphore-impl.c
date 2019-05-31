@@ -13,10 +13,10 @@ void *joiner (pthread_t pthreads[]) {
     int joiner_sum = 0;
     printf("Joiner waiting...\n");
     for (int i = 0; i < numberOfThreads; i++) {
-        int aux = 0;
+        void* aux;
         pthread_join(pthreads[i], &aux);    
-        printf("Thread %d finished. It slept %d seconds.\n", i, aux);
-        joiner_sum += aux;        
+        printf("Thread %d finished. It slept %d seconds.\n", i, (int) aux);
+        joiner_sum += (int) aux;        
     }
 
     pthread_mutex_lock(&mutex);

@@ -21,10 +21,10 @@ int gateway (int num_replicas) {
     int sum = 0;
     printf("Joiner waiting...\n");
     for (int i = 0; i < num_replicas; i++) {
-        int aux = 0;
+        void* aux;
         pthread_join(pthreads[i], &aux);    
-        printf("Thread %d finished. It sleeped %d seconds.\n", i, aux);
-        sum += aux;
+        printf("Thread %d finished. It sleeped %d seconds.\n", i, (int) aux);
+        sum += (int) aux;
     }
     return sum;
 }
