@@ -23,7 +23,7 @@ int gateway (int num_replicas) {
     for (int i = 0; i < num_replicas; i++) {
         int aux = 0;
         pthread_join(pthreads[i], &aux);    
-        printf("Thread %d finished.\n", i);
+        printf("Thread %d finished. It sleeped %d seconds.\n", i, aux);
         sum += aux;
     }
     return sum;
