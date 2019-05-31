@@ -9,6 +9,7 @@ int first_to_wake_value = 0;
 
 void *request (void *args) {
     int random_number = (rand() % 30) + 1; // // Obtain a number between [1 - 30].
+    printf("Request will sleep %d seconds\n", random_number);
     sleep(random_number); // Sleeps seconds
 
     pthread_mutex_lock(&mutex);

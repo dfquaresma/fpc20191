@@ -4,6 +4,7 @@
 
 void *request (void *args) {
     int random_number = (rand() % 30) + 1; // // Obtain a number between [1 - 30].
+    printf("Request will sleep %d seconds\n", random_number);
     sleep(random_number); // Sleeps seconds
     pthread_exit(random_number);
 }
@@ -13,10 +14,13 @@ int gateway (int num_replicas) {
     for (int i = 0; i < num_replicas; i++) {
         pthread_create (&pthreads[i], NULL, &request, (void*) i);
     }
+    
     int sum = 0;
+    printf("Joiner waititng...\n");
     for (int i = 0; i < num_replicas; i++) {
         int aux;
-        pthread_join(pthreads[i], &aux);
+        pthread_join(pthreads[i], &aux);    
+        printf("Thread %d finished.\n", i);
         sum += aux;
     }
     return sum;
