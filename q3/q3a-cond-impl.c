@@ -9,7 +9,6 @@ pthread_cond_t cond;
 int first_to_wake_value = 0;
 
 void *request (void *args) {
-    srand ( time(NULL) );
     int random_number = (rand() % 30) + 1; // // Obtain a number between [1 - 30].
     printf("Request will sleep %d seconds\n", random_number);
     sleep(random_number); // Sleeps seconds
@@ -40,6 +39,7 @@ int gateway (int num_replicas) {
 }
 
 int main (int argc, char *argv[]) {
+    srand ( time(NULL) );
     pthread_mutex_init(&mutex, NULL);
     pthread_cond_init(&cond, NULL);
     printf("gateway=%d\n", gateway(5));
