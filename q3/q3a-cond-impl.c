@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <time.h>
 
+int numberOfThreads = 5;
 pthread_mutex_t mutex;
 pthread_cond_t cond;
 int first_to_wake_value = 0;
@@ -42,5 +43,5 @@ int main (int argc, char *argv[]) {
     srand ( time(NULL) );
     pthread_mutex_init(&mutex, NULL);
     pthread_cond_init(&cond, NULL);
-    printf("gateway=%d\n", gateway(5));
+    printf("gateway=%d\n", gateway(numberOfThreads));
 }
