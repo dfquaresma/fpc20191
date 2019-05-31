@@ -2,12 +2,14 @@
 #include <assert.h>
 #include <pthread.h>
 #include <stdbool.h>
+#include <time.h>
 
 pthread_mutex_t mutex;
 pthread_cond_t cond;
 int first_to_wake_value = 0;
 
 void *request (void *args) {
+    srand ( time(NULL) );
     int random_number = (rand() % 30) + 1; // // Obtain a number between [1 - 30].
     printf("Request will sleep %d seconds\n", random_number);
     sleep(random_number); // Sleeps seconds
