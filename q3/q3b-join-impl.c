@@ -19,7 +19,7 @@ int gateway (int num_replicas) {
     int sum = 0;
     printf("Joiner waititng...\n");
     for (int i = 0; i < num_replicas; i++) {
-        int aux;
+        int aux = 0;
         pthread_join(pthreads[i], &aux);    
         printf("Thread %d finished.\n", i);
         sum += aux;
