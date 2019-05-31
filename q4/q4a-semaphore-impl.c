@@ -48,7 +48,7 @@ int gateway (int num_replicas) {
 
     sem_wait(&semaphore);
     pthread_mutex_lock(&mutex);
-    int valueToReturn = *first_to_wake_value;
+    int valueToReturn = first_to_wake_value;
     pthread_mutex_unlock(&mutex);
     return valueToReturn;
 }
