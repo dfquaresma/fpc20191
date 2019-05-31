@@ -65,7 +65,7 @@ int gateway (int num_replicas) {
     pthread_t joinerThread;
     pthread_create(&joinerThread, NULL, &joiner, &pthreads);
     pthread_t timerThread;
-    //pthread_create(&timerThread, NULL, &timer, &number_of_threads_running);
+    pthread_create(&timerThread, NULL, &timer, &number_of_threads_running);
 
     sem_wait(&semaphore);
     pthread_mutex_lock(&mutex);
