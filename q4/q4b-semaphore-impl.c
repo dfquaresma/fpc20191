@@ -56,8 +56,8 @@ void *request (int *number_of_threads_running) {
 }
 
 int gateway (int num_replicas) {
-    pthread_t *pthreads[5];
-    int *number_of_threads_running = num_replicas;
+    pthread_t pthreads[5];
+    int number_of_threads_running = num_replicas;
     for (int i = 0; i < num_replicas; i++) {
         pthread_create (&pthreads[i], NULL, &request, &number_of_threads_running);
     }

@@ -38,7 +38,7 @@ void *request (int *first_to_wake_value) {
 }
 
 int gateway (int num_replicas) {
-    int *first_to_wake_value = 0;
+    int first_to_wake_value = 0;
     pthread_t pthreads[num_replicas];
     for (int i = 0; i < num_replicas; i++) {
         pthread_create(&pthreads[i], NULL, &request, &first_to_wake_value);
