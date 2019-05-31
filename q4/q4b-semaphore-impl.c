@@ -9,12 +9,12 @@ pthread_mutex_t mutex;
 int numberOfThreads = 5;
 int sleep_sum = 0;
 
-void *joiner (pthread_t *pthreads[]) {
+void *joiner (pthread_t pthreads[]) {
     int joiner_sum = 0;
     printf("Joiner waiting...\n");
     for (int i = 0; i < numberOfThreads; i++) {
         int aux = 0;
-        pthread_join(*pthreads[i], &aux);    
+        pthread_join(pthreads[i], &aux);    
         printf("Thread %d finished. It slept %d seconds.\n", i, aux);
         joiner_sum += aux;        
     }
