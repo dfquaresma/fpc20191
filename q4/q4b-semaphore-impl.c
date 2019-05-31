@@ -78,5 +78,5 @@ int main (int argc, char *argv[]) {
     srand ( time(NULL) );
     sem_init(&semaphore, 0, 0);
     pthread_mutex_init(&mutex, NULL);
-    printf("gateway=%ld\n", gateway(numberOfThreads));
+    printf("gateway=%d\n", gateway(numberOfThreads));
 }
