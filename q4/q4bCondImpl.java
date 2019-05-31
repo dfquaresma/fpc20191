@@ -74,7 +74,7 @@ public class Main {
             } catch (InterruptedException e) {}
             synchronized(this.sum) {
                 if (this.sum.getAddsCount() < this.threadNumber) {
-                    this.sum.set(-1);
+                    this.sum.setTimeout();
                 }
                 this.sum.notifyAll();
             }
