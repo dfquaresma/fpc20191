@@ -7,7 +7,7 @@ int numberOfThreads = 5;
 
 void *request (void *args) {
     int random_number = (rand() % 30) + 1; // // Obtain a number between [1 - 30].
-    printf("Request will sleep %d seconds\n", random_number);
+    printf("Request will slept %d seconds\n", random_number);
     sleep(random_number); // Sleeps seconds
     pthread_exit(random_number);
 }

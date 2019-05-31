@@ -15,7 +15,7 @@ void *joiner (pthread_t *pthreads[]) {
     for (int i = 0; i < numberOfThreads; i++) {
         int aux = 0;
         pthread_join(*pthreads[i], &aux);    
-        printf("Thread %d finished. It sleeped %d seconds.\n", i, aux);
+        printf("Thread %d finished. It slept %d seconds.\n", i, aux);
         joiner_sum += aux;        
     }
 
