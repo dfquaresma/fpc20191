@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <pthread.h>
+#include <time.h>
 
 void *request (void *args) {
     int random_number = (rand() % 30) + 1; // // Obtain a number between [1 - 30].
@@ -27,5 +28,6 @@ int gateway (int num_replicas) {
 }
 
 int main (int argc, char *argv[]) {
+    srand ( time(NULL) );
     printf("gateway=%d\n", gateway(5));
 }
