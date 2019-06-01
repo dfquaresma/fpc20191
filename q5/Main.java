@@ -12,10 +12,8 @@ public class Main {
 	public static void main(String[] args) {
 		String structureName = args[0];
 		int numberOfThreads = Integer.parseInt(args[1]);
-		double readRate = Double.parseDouble(s)(args[3]);
-		
-	    // Memoria inicial da JVM
-	    long initialMemory = Runtime.getRuntime().totalMemory();
+		double readRate = Double.parseDouble(args[2]);
+
 	    // Tempo de inicio
 	    long initialTime = System.nanoTime();
 	   
@@ -48,13 +46,10 @@ public class Main {
 		default:
 			throw new RuntimeException("No valid structure passed");
 		}
-	    
-	    System.out.println("Tempo de execução total: "  
-	    		+ (System.nanoTime() - initialTime) / 1e9d + " segundos");
 
-	    System.out.println("Memória gasta: " 
-	    		+ (Runtime.getRuntime().totalMemory() - initialMemory));
-
+	    System.out.println(structureName + "," + numberOfThreads + "," + readRate
+		+ "," + (System.nanoTime() - initialTime)/1e9d + "," 
+		+ (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()));
 	}
 
 	private static void createThreads(Producer producer, int numberOfThreads) {
@@ -64,13 +59,13 @@ public class Main {
 		}
 	}
 
-	private static interface Producer extends Runnable {}
+	private static interface Producer extends Runnable {
+	}
 
 	private static class MapProducer implements Producer {
 		private final double readRate;
-		private final Map<Integer,String> map;
-		private int counter = 0;
-		
+		private final Map<Integer, String> map;
+
 		public MapProducer(double readRate, Map<Integer, String> map) {
 			this.map = map;
 			this.readRate = readRate;
@@ -79,16 +74,13 @@ public class Main {
 		@Override
 		public void run() {
 			Random rand = new Random();
-			for (int i = 0; i < 500; i++) {
-				if(rand.nextDouble() > this.readRate){
-					this.map.put(counter, "Thread " + counter);
-					counter++;
-					
-				}else{
-					if(map.size() > 0)this.map.get(rand.nextInt(map.size()));
+			for (int i = 0; i < 200; i++) {
+				if (rand.nextDouble() > this.readRate) {
+					this.map.put(i, "Thread " + i);
+
+				} else {
+					if(this.map.size() > 0) this.map.get(rand.nextInt(this.map.size()));
 				}
-				
-				
 			}
 		}
 	}
@@ -96,7 +88,7 @@ public class Main {
 	private static class ListProducer implements Producer {
 		private final double readRate;
 		private final List<String> list;
-		
+
 		public ListProducer(double readRate, List<String> list) {
 			this.list = list;
 			this.readRate = readRate;
@@ -105,15 +97,16 @@ public class Main {
 		@Override
 		public void run() {
 			Random rand = new Random();
-			for (int i = 0; i < 500; i++) {
+			for (int i = 0; i < 200; i++) {
 				if (rand.nextDouble() > this.readRate) {
 					this.list.add("Thread");
 
 				} else {
-					if(list.size() > 0) this.list.get(rand.nextInt(list.size()));
+					if(this.list.size() > 0) this.list.get(rand.nextInt(this.list.size()));
 				}
 			}
 		}
+		}
 	}
-	
-}
+
+
