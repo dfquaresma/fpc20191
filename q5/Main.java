@@ -46,7 +46,7 @@ public class Main {
 
 	private static void createThreads(Producer producer, int numberOfThreads) {
 		for (int i = 0; i < numberOfThreads; i++) {
-			Thread thread = new Thread(producer, "Estrutura");
+			Thread thread = new Thread(producer, "Producer" + i);
 			thread.start();
 		}
 	}
