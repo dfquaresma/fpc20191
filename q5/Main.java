@@ -21,7 +21,7 @@ public class Main {
 			createThreads(producer, numberOfThreads);
 			break;
 
-		case "syncronizedMap":
+		case "synchronizedMap":
 			Map synchronizedMap =  Collections.synchronizedMap(new HashMap<String, String>());
 			producer = new MapProducer(readRate, synchronizedMap);
 			createThreads(producer, numberOfThreads);
