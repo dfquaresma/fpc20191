@@ -6,7 +6,7 @@ gcc -o q1-impl q1-impl.c  -pthread
 gcc -o q1-thread-safe-impl q1-thread-safe-impl.c  -pthread
 ```
 
-## Comando para executar Run
+## Comando para executar
 ```bash
 ./q1-impl
 ./q1-thread-safe-impl
