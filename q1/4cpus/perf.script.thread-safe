@@ -1,0 +1,72 @@
+ q1-thread-safe- 16108 [002] 50170.698693: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16108 runtime=463662 [ns] vruntime=1669930934035 [ns]
+ q1-thread-safe- 16108 [002] 50170.698705: sched:sched_process_fork: comm=q1-thread-safe- pid=16108 child_comm=q1-thread-safe- child_pid=16109
+ q1-thread-safe- 16108 [002] 50170.698710:   sched:sched_wakeup_new: comm=q1-thread-safe- pid=16109 prio=120 target_cpu=000
+         swapper     0 [000] 50170.698717:       sched:sched_switch: prev_comm=swapper/0 prev_pid=0 prev_prio=120 prev_state=S ==> next_comm=q1-thread-safe- next_pid=16109 next_prio=120
+ q1-thread-safe- 16108 [002] 50170.698727: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16108 runtime=33942 [ns] vruntime=1669930967977 [ns]
+ q1-thread-safe- 16108 [002] 50170.698730: sched:sched_process_fork: comm=q1-thread-safe- pid=16108 child_comm=q1-thread-safe- child_pid=16110
+ q1-thread-safe- 16108 [002] 50170.698733:   sched:sched_wakeup_new: comm=q1-thread-safe- pid=16110 prio=120 target_cpu=003
+         swapper     0 [003] 50170.698735:       sched:sched_switch: prev_comm=swapper/3 prev_pid=0 prev_prio=120 prev_state=S ==> next_comm=q1-thread-safe- next_pid=16110 next_prio=120
+ q1-thread-safe- 16110 [003] 50170.698742: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16110 runtime=9390 [ns] vruntime=1421088505383 [ns]
+ q1-thread-safe- 16110 [003] 50170.698743:       sched:sched_switch: prev_comm=q1-thread-safe- prev_pid=16110 prev_prio=120 prev_state=D ==> next_comm=swapper/3 next_pid=0 next_prio=120
+ q1-thread-safe- 16108 [002] 50170.698754: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16108 runtime=26631 [ns] vruntime=1669930994608 [ns]
+ q1-thread-safe- 16108 [002] 50170.698756: sched:sched_process_fork: comm=q1-thread-safe- pid=16108 child_comm=q1-thread-safe- child_pid=16111
+ q1-thread-safe- 16108 [002] 50170.698758: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16108 runtime=4228 [ns] vruntime=1669930998836 [ns]
+ q1-thread-safe- 16108 [002] 50170.698759:   sched:sched_wakeup_new: comm=q1-thread-safe- pid=16111 prio=120 target_cpu=002
+ q1-thread-safe- 16108 [002] 50170.698763: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16108 runtime=5342 [ns] vruntime=1669931004178 [ns]
+ q1-thread-safe- 16108 [002] 50170.698765:       sched:sched_switch: prev_comm=q1-thread-safe- prev_pid=16108 prev_prio=120 prev_state=D ==> next_comm=q1-thread-safe- next_pid=16111 next_prio=120
+ q1-thread-safe- 16111 [002] 50170.698769: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16111 runtime=5580 [ns] vruntime=1669940004410 [ns]
+ q1-thread-safe- 16111 [002] 50170.698770:       sched:sched_switch: prev_comm=q1-thread-safe- prev_pid=16111 prev_prio=120 prev_state=D ==> next_comm=swapper/2 next_pid=0 next_prio=120
+ q1-thread-safe- 16109 [000] 50170.700228: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16109 runtime=1515163 [ns] vruntime=1547200152974 [ns]
+ q1-thread-safe- 16109 [000] 50170.704226: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16109 runtime=3998885 [ns] vruntime=1547204151859 [ns]
+ q1-thread-safe- 16109 [000] 50170.706994: sched:sched_migrate_task: comm=ntpd pid=1584 prio=120 orig_cpu=0 dest_cpu=1
+ q1-thread-safe- 16109 [000] 50170.706999:       sched:sched_wakeup: comm=ntpd pid=1584 prio=120 target_cpu=001
+ q1-thread-safe- 16109 [000] 50170.708226: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16109 runtime=3999851 [ns] vruntime=1547208151710 [ns]
+ q1-thread-safe- 16109 [000] 50170.712226: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16109 runtime=3999868 [ns] vruntime=1547212151578 [ns]
+ q1-thread-safe- 16109 [000] 50170.716225: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16109 runtime=3999379 [ns] vruntime=1547216150957 [ns]
+ q1-thread-safe- 16109 [000] 50170.720226: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16109 runtime=4000461 [ns] vruntime=1547220151418 [ns]
+ q1-thread-safe- 16109 [000] 50170.722786:       sched:sched_wakeup: comm=q1-thread-safe- pid=16110 prio=120 target_cpu=003
+         swapper     0 [003] 50170.722816:       sched:sched_switch: prev_comm=swapper/3 prev_pid=0 prev_prio=120 prev_state=S ==> next_comm=q1-thread-safe- next_pid=16110 next_prio=120
+ q1-thread-safe- 16109 [000] 50170.722830: sched:sched_migrate_task: comm=kworker/u8:2 pid=15588 prio=120 orig_cpu=3 dest_cpu=1
+ q1-thread-safe- 16109 [000] 50170.722831:       sched:sched_wakeup: comm=kworker/u8:2 pid=15588 prio=120 target_cpu=001
+ q1-thread-safe- 16109 [000] 50170.722988:       sched:sched_wakeup: comm=q1-thread-safe- pid=16108 prio=120 target_cpu=002
+ q1-thread-safe- 16109 [000] 50170.723000: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16109 runtime=2774500 [ns] vruntime=1547222925918 [ns]
+             :-1    -1 [000] 50170.723008: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16109 runtime=8100 [ns] vruntime=1547222934018 [ns]
+             :-1    -1 [000] 50170.723009:       sched:sched_switch: prev_comm=q1-thread-safe- prev_pid=16109 prev_prio=120 prev_state=Z ==> next_comm=swapper/0 next_pid=0 next_prio=120
+         swapper     0 [002] 50170.723010:       sched:sched_switch: prev_comm=swapper/2 prev_pid=0 prev_prio=120 prev_state=S ==> next_comm=q1-thread-safe- next_pid=16108 next_prio=120
+ q1-thread-safe- 16108 [002] 50170.723016: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16108 runtime=28028 [ns] vruntime=1669931032438 [ns]
+ q1-thread-safe- 16108 [002] 50170.723017:       sched:sched_switch: prev_comm=q1-thread-safe- prev_pid=16108 prev_prio=120 prev_state=D ==> next_comm=swapper/2 next_pid=0 next_prio=120
+ q1-thread-safe- 16110 [003] 50170.724228: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16110 runtime=1414269 [ns] vruntime=1421089919652 [ns]
+ q1-thread-safe- 16110 [003] 50170.728226: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16110 runtime=3998672 [ns] vruntime=1421093918324 [ns]
+ q1-thread-safe- 16110 [003] 50170.732225: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16110 runtime=3999636 [ns] vruntime=1421097917960 [ns]
+ q1-thread-safe- 16110 [003] 50170.736225: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16110 runtime=4000077 [ns] vruntime=1421101918037 [ns]
+ q1-thread-safe- 16110 [003] 50170.740224: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16110 runtime=3999198 [ns] vruntime=1421105917235 [ns]
+ q1-thread-safe- 16110 [003] 50170.744225: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16110 runtime=4000505 [ns] vruntime=1421109917740 [ns]
+ q1-thread-safe- 16110 [003] 50170.747661:       sched:sched_wakeup: comm=q1-thread-safe- pid=16111 prio=120 target_cpu=002
+ q1-thread-safe- 16110 [003] 50170.747667:       sched:sched_wakeup: comm=kworker/u8:2 pid=15588 prio=120 target_cpu=001
+ q1-thread-safe- 16110 [003] 50170.747688: sched:sched_migrate_task: comm=q1-thread-safe- pid=16108 prio=120 orig_cpu=2 dest_cpu=0
+ q1-thread-safe- 16110 [003] 50170.747689:       sched:sched_wakeup: comm=q1-thread-safe- pid=16108 prio=120 target_cpu=000
+         swapper     0 [002] 50170.747691:       sched:sched_switch: prev_comm=swapper/2 prev_pid=0 prev_prio=120 prev_state=S ==> next_comm=q1-thread-safe- next_pid=16111 next_prio=120
+ q1-thread-safe- 16110 [003] 50170.747692: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16110 runtime=3467011 [ns] vruntime=1421113384751 [ns]
+             :-1    -1 [003] 50170.747707: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16110 runtime=15149 [ns] vruntime=1421113399900 [ns]
+             :-1    -1 [003] 50170.747711:       sched:sched_switch: prev_comm=q1-thread-safe- prev_pid=16110 prev_prio=120 prev_state=Z ==> next_comm=swapper/3 next_pid=0 next_prio=120
+         swapper     0 [000] 50170.747712:       sched:sched_switch: prev_comm=swapper/0 prev_pid=0 prev_prio=120 prev_state=S ==> next_comm=q1-thread-safe- next_pid=16108 next_prio=120
+ q1-thread-safe- 16108 [000] 50170.747718: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16108 runtime=9018 [ns] vruntime=1547213971064 [ns]
+ q1-thread-safe- 16108 [000] 50170.747719:       sched:sched_switch: prev_comm=q1-thread-safe- prev_pid=16108 prev_prio=120 prev_state=D ==> next_comm=swapper/0 next_pid=0 next_prio=120
+ q1-thread-safe- 16111 [002] 50170.748228: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16111 runtime=538978 [ns] vruntime=1669940543388 [ns]
+ q1-thread-safe- 16111 [002] 50170.752225: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16111 runtime=3998042 [ns] vruntime=1669944541430 [ns]
+ q1-thread-safe- 16111 [002] 50170.756225: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16111 runtime=3999715 [ns] vruntime=1669948541145 [ns]
+ q1-thread-safe- 16111 [002] 50170.760225: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16111 runtime=3999952 [ns] vruntime=1669952541097 [ns]
+ q1-thread-safe- 16111 [002] 50170.764224: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16111 runtime=3999281 [ns] vruntime=1669956540378 [ns]
+ q1-thread-safe- 16111 [002] 50170.768224: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16111 runtime=4000506 [ns] vruntime=1669960540884 [ns]
+ q1-thread-safe- 16111 [002] 50170.772158:       sched:sched_wakeup: comm=kworker/u8:2 pid=15588 prio=120 target_cpu=001
+ q1-thread-safe- 16111 [002] 50170.772181:       sched:sched_wakeup: comm=q1-thread-safe- pid=16108 prio=120 target_cpu=000
+ q1-thread-safe- 16111 [002] 50170.772183: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16111 runtime=3958542 [ns] vruntime=1669964499426 [ns]
+             :-1    -1 [002] 50170.772198: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16111 runtime=14590 [ns] vruntime=1669964514016 [ns]
+             :-1    -1 [002] 50170.772199:       sched:sched_switch: prev_comm=q1-thread-safe- prev_pid=16111 prev_prio=120 prev_state=Z ==> next_comm=swapper/2 next_pid=0 next_prio=120
+         swapper     0 [000] 50170.772202:       sched:sched_switch: prev_comm=swapper/0 prev_pid=0 prev_prio=120 prev_state=S ==> next_comm=q1-thread-safe- next_pid=16108 next_prio=120
+ q1-thread-safe- 16108 [000] 50170.772213:       sched:sched_wakeup: comm=kworker/u8:2 pid=15588 prio=120 target_cpu=001
+ q1-thread-safe- 16108 [000] 50170.772226: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16108 runtime=26437 [ns] vruntime=1547213997501 [ns]
+ q1-thread-safe- 16108 [000] 50170.772292: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16108 runtime=66094 [ns] vruntime=1547214063595 [ns]
+ q1-thread-safe- 16108 [000] 50170.772305:       sched:sched_wakeup: comm=perf pid=16105 prio=120 target_cpu=001
+ q1-thread-safe- 16108 [000] 50170.772306: sched:sched_stat_runtime: comm=q1-thread-safe- pid=16108 runtime=14779 [ns] vruntime=1547214078374 [ns]
+ q1-thread-safe- 16108 [000] 50170.772307:       sched:sched_switch: prev_comm=q1-thread-safe- prev_pid=16108 prev_prio=120 prev_state=P ==> next_comm=swapper/0 next_pid=0 next_prio=120
