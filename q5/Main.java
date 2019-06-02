@@ -8,14 +8,16 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Main {
+	private static double elements_to_fill_structures;
 
 	public static void main(String[] args) {
 		String structureName = args[0];
 		int numberOfThreads = Integer.parseInt(args[1]);
 		double readRate = Double.parseDouble(args[2]);
 		
+		elements_to_fill_structures = 1000000 / numberOfThreads;
 		System.out.printf("is_write_op,time_in_nanoseconds\n");
-		
+
 	    Producer producer;	
 	    switch (structureName) {
 		case "concurrentHash":
@@ -69,7 +71,7 @@ public class Main {
 		@Override
 		public void run() {
 			Random rand = new Random();
-			for (int i = 0; i < 200; i++) {
+			for (int i = 0; i < elements_to_fill_structures; i++) {
 				long timeBefore = 0, timeAfter = 0;
 				Double randomDouble = rand.nextDouble();
 				boolean isPutOp =  randomDouble > this.readRate;
@@ -105,7 +107,7 @@ public class Main {
 		@Override
 		public void run() {
 			Random rand = new Random();
-			for (int i = 0; i < 200; i++) {
+			for (int i = 0; i < elements_to_fill_structures; i++) {
 				long timeBefore = 0, timeAfter = 0;
 				Double randomDouble = rand.nextDouble();
 				boolean isAddOp = rand.nextDouble() > this.readRate;
