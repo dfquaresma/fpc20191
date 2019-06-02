@@ -54,7 +54,7 @@ graph_tail <- function(concurrentHash, synchronizedMap, copyOnWriteList, synchro
     scale_color_manual(breaks = c("concurrentHash", "synchronizedMap", "copyOnWriteList", "synchronizedList"), values=c("blue", "red", "green", "purple")) +
     theme_bw() +
     ggtitle(title) +
-    xlab("tempo de execução (ms)") +
+    xlab("tempo de execução (ns)") +
     ylab("frequência") 
   
   print(p)
