@@ -13,6 +13,9 @@ echo "STRUCTURE_OPTION: ${STRUCTURE_OPTION:= concurrentHash synchronizedMap copy
 echo "NUMBER_OF_THREADS: ${NUMBER_OF_THREADS:= 1 128 512}"
 echo "READ_RATE: ${READ_RATE:= 0 0.25 0.5 0.75 1}"
 
+# Compiling the stuff
+javac Main.java
+
 for expid in `seq ${EXPID_START} ${EXPID_END}`;
 do
     echo ${expid}
@@ -30,3 +33,6 @@ do
         done;
     done;
 done
+
+# Cleaning the stuff
+rm -rf *.class Main.java
