@@ -26,4 +26,4 @@ do
 done
 
 # Cleaning the stuff
-rm -rf *.class Main.java
+rm -rf *.class Main
