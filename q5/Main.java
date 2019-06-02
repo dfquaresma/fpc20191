@@ -14,9 +14,6 @@ public class Main {
 		int numberOfThreads = Integer.parseInt(args[1]);
 		double readRate = Double.parseDouble(args[2]);
 
-	    // Tempo de inicio
-	    long initialTime = System.nanoTime();
-	   
 	    Producer producer;	
 	    switch (structureName) {
 		case "concurrentHash":
@@ -46,10 +43,6 @@ public class Main {
 		default:
 			throw new RuntimeException("No valid structure passed");
 		}
-
-	    System.out.println(structureName + "," + numberOfThreads + "," + readRate
-		+ "," + (System.nanoTime() - initialTime)/1e9d + "," 
-		+ (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()));
 	}
 
 	private static void createThreads(Producer producer, int numberOfThreads) {
@@ -75,12 +68,25 @@ public class Main {
 		public void run() {
 			Random rand = new Random();
 			for (int i = 0; i < 200; i++) {
-				if (rand.nextDouble() > this.readRate) {
-					this.map.put(i, "Thread " + i);
+				long timeBefore = 0, timeAfter = 0;
+				Double randomDouble = rand.nextDouble();
+				boolean isPutOp =  randomDouble > this.readRate;
+				if (isPutOp) {
+					int keyToPut = this.map.size();
+					String valueToPut = "Thread " + randomDouble;  
+					timeBefore = System.nanoTime();
+					this.map.put(keyToPut, valueToPut);
+					timeAfter = System.nanoTime();
 
 				} else {
-					if(this.map.size() > 0) this.map.get(rand.nextInt(this.map.size()));
+					if (this.map.size() > 0) {
+						int keyToGet = rand.nextInt(this.map.size());
+						timeBefore = System.nanoTime();
+						this.map.get(keyToGet);
+						timeAfter = System.nanoTime();
+					} 
 				}
+				System.out.printf("%b,%d\n", isPutOp, (timeAfter - timeBefore));	
 			}
 		}
 	}
@@ -98,12 +104,24 @@ public class Main {
 		public void run() {
 			Random rand = new Random();
 			for (int i = 0; i < 200; i++) {
-				if (rand.nextDouble() > this.readRate) {
-					this.list.add("Thread");
+				long timeBefore = 0, timeAfter = 0;
+				Double randomDouble = rand.nextDouble();
+				boolean isAddOp = rand.nextDouble() > this.readRate;
+				if (isAddOp) {
+					String valueToAdd = "Thread " + randomDouble;
+					timeBefore = System.nanoTime();
+					this.list.add(valueToAdd);
+					timeAfter = System.nanoTime();
 
 				} else {
-					if(this.list.size() > 0) this.list.get(rand.nextInt(this.list.size()));
+					if(this.list.size() > 0) {
+						int indexToGet = rand.nextInt(this.list.size());
+						timeBefore = System.nanoTime();
+						this.list.get(indexToGet);
+						timeAfter = System.nanoTime();
+					}
 				}
+				System.out.printf("%b,%d\n", isPutOp, timeAfter - timeBefore);	
 			}
 		}
 		}
