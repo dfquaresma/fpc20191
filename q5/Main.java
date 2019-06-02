@@ -13,7 +13,9 @@ public class Main {
 		String structureName = args[0];
 		int numberOfThreads = Integer.parseInt(args[1]);
 		double readRate = Double.parseDouble(args[2]);
-
+		
+		System.out.printf("is_write_op,time_in_nanoseconds\n");
+		
 	    Producer producer;	
 	    switch (structureName) {
 		case "concurrentHash":
