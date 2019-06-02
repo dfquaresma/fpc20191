@@ -121,7 +121,7 @@ public class Main {
 						timeAfter = System.nanoTime();
 					}
 				}
-				System.out.printf("%b,%d\n", isPutOp, timeAfter - timeBefore);	
+				System.out.printf("%b,%d\n", isAddOp, timeAfter - timeBefore);	
 			}
 		}
 		}
