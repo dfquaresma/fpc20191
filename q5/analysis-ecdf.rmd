@@ -1,7 +1,7 @@
 ---
-title: "Garbage Collector Impact"
-author: "David Ferreira Quaresma (david.quaresma@ccc.ufcg.edu.br)"
-date: "janeiro, 2019"
+title: "FPC lista 1 - questão 5: ECDFs"
+author: "David Ferreira Quaresma (david.quaresma@ccc.ufcg.edu.br), Renato Dantas Henriques (renato.henriques@ccc.ufcg.edu.br)"
+date: "junho, 2019"
 output: pdf_document
 ---
 
@@ -20,6 +20,7 @@ synchronizedMap <- filter(synchronizedMap, time_in_nanoseconds > 0)
 graph_tail_map(concurrentHash$time_in_nanoseconds, synchronizedMap$time_in_nanoseconds,
         title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.90)
 ```
+
 ## ECDF - 1024 threads, 50/50 read/write
 ```{r}
 concurrentHash = read.csv("./results/concurrentHash-t1024-r0.5.csv", header=T, dec=".")
@@ -97,7 +98,7 @@ synchronizedMap = read.csv("./results/synchronizedMap-t1-r0.9.csv", header=T, de
 concurrentHash <- filter(concurrentHash, time_in_nanoseconds > 0)
 synchronizedMap <- filter(synchronizedMap, time_in_nanoseconds > 0)
 graph_tail_map(concurrentHash$time_in_nanoseconds, synchronizedMap$time_in_nanoseconds,
-        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+        title="ECDF", x_limit_inf=100, x_limit_sup=1000, annotate_y=0.95)
 ```
 
 ## ECDF - 1 threads, 10/90 read/write

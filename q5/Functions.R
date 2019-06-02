@@ -1,3 +1,27 @@
+print_summary_table <- function(structure1, structure2, structure1_name, structure2_name) {
+  structure1 <- structure1$time_in_nanoseconds
+  structure2 <- structure2$time_in_nanoseconds
+  
+  stats <- function(df, tag) {
+    p50 = quantileCI::quantile_confint_nyblom(df, 0.5)
+    p95 = quantileCI::quantile_confint_nyblom(df, 0.95)
+    p99 = quantileCI::quantile_confint_nyblom(df, 0.99)
+    p999 = quantileCI::quantile_confint_nyblom(df, 0.999)
+    p9999 = quantileCI::quantile_confint_nyblom(df, 0.9999)
+    
+    cat("Tempo de execução(ns) ", tag, " ")
+    cat("avg:", signif(t.test(df)$conf.int, digits = 2), " | ")
+    cat("50:", signif(p50, digits = 4), " | ")
+    cat("95:", signif(p95, digits = 4), " | ")
+    cat("99:", signif(p99, digits = 4), " | ")
+    cat("99.9:", signif(p999, digits = 4), " | ")
+    cat("99.99:", signif(p9999, digits = 4), " | ")
+    cat("Dist.Tail.:", signif(p9999-p50, digits = 4))
+    cat("\n")
+  }
+  stats(structure1, structure1_name)
+  stats(structure2, structure2_name)
+}
 
 graph_tail_map <- function(concurrentHash, synchronizedMap, title, x_limit_inf, x_limit_sup, annotate_y) {
   cmp <- rbind(
