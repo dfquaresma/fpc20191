@@ -6,8 +6,8 @@ GREEN='\033[0;32m'
 NC='\033[0m'
 
 echo "STRUCTURE_OPTION: ${STRUCTURE_OPTION:= concurrentHash synchronizedMap copyOnWriteList synchronizedList}"
-echo "NUMBER_OF_THREADS: ${NUMBER_OF_THREADS:= 1 128 512}"
-echo "READ_RATE: ${READ_RATE:= 0 0.25 0.5 0.75 1}"
+echo "NUMBER_OF_THREADS: ${NUMBER_OF_THREADS:=1 1024 16384}"
+echo "READ_RATE: ${READ_RATE:=0.1 0.5 0.9}"
 
 # Compiling the stuff
 javac Main.java
