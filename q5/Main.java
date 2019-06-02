@@ -15,7 +15,7 @@ public class Main {
 		int numberOfThreads = Integer.parseInt(args[1]);
 		double readRate = Double.parseDouble(args[2]);
 		
-		elements_to_fill_structures = 262144 / numberOfThreads; // 4194304 = 2^18
+		elements_to_fill_structures = 65536 / numberOfThreads; // 65536 = 2^16
 		System.out.printf("is_write_op,time_in_nanoseconds\n");
 
 	    Producer producer;	
