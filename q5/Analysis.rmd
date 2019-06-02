@@ -1,0 +1,29 @@
+---
+title: "Garbage Collector Impact"
+author: "David Ferreira Quaresma (david.quaresma@ccc.ufcg.edu.br)"
+date: "janeiro, 2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+require(dplyr)
+require(ggplot2)
+source("functions.R")
+```
+
+# Resultados
+```{r}
+concurrentHash = read.csv("./results/concurrentHash-t1024-r.csv", header=T, dec=".")
+synchronizedMap = read.csv("./results/synchronizedMap.csv", header=T, dec=".")
+copyOnWriteList = read.csv("./results/copyOnWriteList.csv, header=T, dec=".")
+synchronizedList = read.csv("./results/synchronizedList.csv, header=T, dec=".")
+
+nocollect <- filter(results, scavenge_count + marksweep_count == 0)
+withcollect <- filter(results, scavenge_count + marksweep_count > 0)
+```
+
+## ECDF
+```{r}
+graph_tail(nocollect$execution_time, withcollect$execution_time,
+           title="ECDF", x_limit_inf=0, x_limit_sup=200, annotate_y=0.90)
+```
