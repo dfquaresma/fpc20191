@@ -15,8 +15,8 @@ source("functions.R")
 ```{r}
 concurrentHash = read.csv("./results/concurrentHash-t1024-r0.5.csv", header=T, dec=".")
 synchronizedMap = read.csv("./results/synchronizedMap-t1024-r0.5.csv", header=T, dec=".")
-copyOnWriteList = read.csv("./results/copyOnWriteList-t1024-r0.5.csv, header=T, dec=".")
-synchronizedList = read.csv("./results/synchronizedList-t1024-r0.5.csv, header=T, dec=".")
+copyOnWriteList = read.csv("./results/copyOnWriteList-t1024-r0.5.csv", header=T, dec=".")
+synchronizedList = read.csv("./results/synchronizedList-t1024-r0.5.csv", header=T, dec=".")
 ```
 
 ## ECDF
