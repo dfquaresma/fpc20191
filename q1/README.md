@@ -1,7 +1,7 @@
 # Questão 1:
 
 ## Análise de desempenho
-Antes de explicar, precisamos primeiro "batizar" as implementações. Chamaremos de Vanila a implementação que não protege as regiões críticas e de Thread-safe a implementação alternativa. Feito isso, constatamos que a implementação Threadsafe tem melhor desempenho que a Vanila. Esse desempenho chega a ser 5 vezes melhor, ou seja, o tempo de execução do Vanila pode ser até 5 vezes maior que o Thread-safe. 
+Antes de explicar, precisamos primeiro "batizar" as implementações. Chamaremos de Vanila a implementação que não protege as regiões críticas e de Thread-safe a implementação alternativa. Feito isso, constatamos que a implementação Thread-safe tem melhor desempenho que a Vanila. Esse desempenho chega a ser 5 vezes melhor, ou seja, o tempo de execução do Vanila pode ser até 5 vezes maior que o Thread-safe. 
 
 Para a análise, executamos os programas até 1000 vezes cada. Fizemos isso utilizando o programa Perf do linux, utilizando especificamente o comando sudo perf stat -d --repeat=numero executavel. Também observamos outras métricas disponibilizadas pelo perf, mas como são mais densas em termos informativos, vamos nos manter nos resultados do perf stat (que já é suficiente). Ainda assim, todos os dados coletados estão salvos no [diretório perf-analysis](https://github.com/dfquaresma/fpc/lista1/q1/perf-analysis).
 
