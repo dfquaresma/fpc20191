@@ -1,4 +1,4 @@
-#Letra A:
+# Letra A:
 
 ConcurrentHashMap e Collections.synchronizedMap()
 
@@ -11,7 +11,7 @@ Analisando graficamente, podemos enxergar também que o concurrentHashMap tem um 
 
 Para os casos com 128 threads, temos que a concurrentHashMap tem um melhor desempenho para os casos de read 90/write 10 e read 50/write 50 enquanto o synchronizedMap tem um melhor desempenho read 10/write 90 para o percentil 50.
 
-## 1 Thread
+### 1 Thread
 
 Para os casos com 1 thread, temos que a synchronizedMap tem menor latência para percentil 50 em todos os cenários de read/write avaliados no experimento.
 
