@@ -1,1 +1,1 @@
-# Fundamentos de Programação Concorrente - Lista 1
+# Fundamentos de Programação Concorrente
