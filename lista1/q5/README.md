@@ -1,5 +1,5 @@
 # Experimento
-Para realizarmos a comparação, realizamos experimentos em uma VM com 8vCPUs e 16GB de RAM. Consideramos utilizar apenas 3 fatores: estrutura a ser experimentada, número de threads e proporção leitura/escrita (put/get ou add/get). Observamos a diferença de desempenho com base no tempo de execução da operação, medido em nanossegundos. Dito isso, o experimento consistiu invocação de 2^16 operações (65536) leitura/escrita na estrutura de dados a ser testada, sendo essas operações invocadas por diferentes números de threads (como mencionado.   
+Para realizarmos a comparação, realizamos experimentos em uma VM com 8vCPUs e 16GB de RAM. Consideramos utilizar apenas 3 fatores: estrutura a ser experimentada, número de threads e proporção leitura/escrita (put/get ou add/get). Observamos a diferença de desempenho com base no tempo de execução da operação, medido em nanossegundos. Dito isso, o experimento consistiu invocação de 2^16 operações (65536) leitura/escrita na estrutura de dados a ser testada, sendo essas operações invocadas por diferentes números de threads (como mencionado).   
 
 # Letra A:
 
