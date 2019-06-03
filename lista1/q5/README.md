@@ -47,7 +47,7 @@ Para as estruturas acima destacadas, constatamos que estatisticamente Collection
 
 ### 1 Thread
 ##### 50/50 read/write
-* Não houve evidência estatísticas que apontassem um melhor.
+* Não houve evidência estatísticas que apontasse o melhor.
 ##### 10/90 read/write
 * SynchronizedList tem melhor desempenho.
 ##### 90/10 read/write
