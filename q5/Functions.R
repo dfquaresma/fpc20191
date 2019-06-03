@@ -9,10 +9,11 @@ print_summary_table <- function(structure1, structure2, structure1_name, structu
     p999 = quantileCI::quantile_confint_nyblom(df, 0.999)
     p9999 = quantileCI::quantile_confint_nyblom(df, 0.9999)
     
-    cat("Tempo de execução(ns) ", tag, " ")
+    cat("Latencia(ns) ", tag, " ")
     cat("avg:", signif(t.test(df)$conf.int, digits = 2), " | ")
     cat("50:", signif(p50, digits = 4), " | ")
     cat("95:", signif(p95, digits = 4), " | ")
+    cat("\n")
     cat("99:", signif(p99, digits = 4), " | ")
     cat("99.9:", signif(p999, digits = 4), " | ")
     cat("99.99:", signif(p9999, digits = 4), " | ")
