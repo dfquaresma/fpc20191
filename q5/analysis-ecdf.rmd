@@ -1,0 +1,205 @@
+---
+title: "FPC lista 1 - questão 5: ECDFs"
+author: "David Ferreira Quaresma (david.quaresma@ccc.ufcg.edu.br), Renato Dantas Henriques (renato.henriques@ccc.ufcg.edu.br)"
+date: "junho, 2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+require(dplyr)
+require(ggplot2)
+source("functions.R")
+```
+
+# Letra A
+```{r}
+concurrentHash = read.csv("./results/concurrentHash-t1024-r0.5.csv", header=T, dec=".")
+synchronizedMap = read.csv("./results/synchronizedMap-t1024-r0.5.csv", header=T, dec=".")
+concurrentHash <- filter(concurrentHash, time_in_nanoseconds > 0)
+synchronizedMap <- filter(synchronizedMap, time_in_nanoseconds > 0)
+graph_tail_map(concurrentHash$time_in_nanoseconds, synchronizedMap$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.90)
+```
+
+## ECDF - 1024 threads, 50/50 read/write
+```{r}
+concurrentHash = read.csv("./results/concurrentHash-t1024-r0.5.csv", header=T, dec=".")
+synchronizedMap = read.csv("./results/synchronizedMap-t1024-r0.5.csv", header=T, dec=".")
+concurrentHash <- filter(concurrentHash, time_in_nanoseconds > 0)
+synchronizedMap <- filter(synchronizedMap, time_in_nanoseconds > 0)
+graph_tail_map(concurrentHash$time_in_nanoseconds, synchronizedMap$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+```
+
+## ECDF - 1024 threads, 90/10 read/write
+```{r}
+concurrentHash = read.csv("./results/concurrentHash-t1024-r0.9.csv", header=T, dec=".")
+synchronizedMap = read.csv("./results/synchronizedMap-t1024-r0.9.csv", header=T, dec=".")
+concurrentHash <- filter(concurrentHash, time_in_nanoseconds > 0)
+synchronizedMap <- filter(synchronizedMap, time_in_nanoseconds > 0)
+graph_tail_map(concurrentHash$time_in_nanoseconds, synchronizedMap$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+```
+
+## ECDF - 1024 threads, 10/90 read/write
+```{r}
+concurrentHash = read.csv("./results/concurrentHash-t1024-r0.1.csv", header=T, dec=".")
+synchronizedMap = read.csv("./results/synchronizedMap-t1024-r0.1.csv", header=T, dec=".")
+concurrentHash <- filter(concurrentHash, time_in_nanoseconds > 0)
+synchronizedMap <- filter(synchronizedMap, time_in_nanoseconds > 0)
+graph_tail_map(concurrentHash$time_in_nanoseconds, synchronizedMap$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+```
+
+## ECDF - 128 threads, 50/50 read/write
+```{r}
+concurrentHash = read.csv("./results/concurrentHash-t128-r0.5.csv", header=T, dec=".")
+synchronizedMap = read.csv("./results/synchronizedMap-t128-r0.5.csv", header=T, dec=".")
+concurrentHash <- filter(concurrentHash, time_in_nanoseconds > 0)
+synchronizedMap <- filter(synchronizedMap, time_in_nanoseconds > 0)
+graph_tail_map(concurrentHash$time_in_nanoseconds, synchronizedMap$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+```
+
+## ECDF - 128 threads, 90/10 read/write
+```{r}
+concurrentHash = read.csv("./results/concurrentHash-t128-r0.9.csv", header=T, dec=".")
+synchronizedMap = read.csv("./results/synchronizedMap-t128-r0.9.csv", header=T, dec=".")
+concurrentHash <- filter(concurrentHash, time_in_nanoseconds > 0)
+synchronizedMap <- filter(synchronizedMap, time_in_nanoseconds > 0)
+graph_tail_map(concurrentHash$time_in_nanoseconds, synchronizedMap$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+```
+
+## ECDF - 128 threads, 10/90 read/write
+```{r}
+concurrentHash = read.csv("./results/concurrentHash-t128-r0.1.csv", header=T, dec=".")
+synchronizedMap = read.csv("./results/synchronizedMap-t128-r0.1.csv", header=T, dec=".")
+concurrentHash <- filter(concurrentHash, time_in_nanoseconds > 0)
+synchronizedMap <- filter(synchronizedMap, time_in_nanoseconds > 0)
+graph_tail_map(concurrentHash$time_in_nanoseconds, synchronizedMap$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+```
+
+## ECDF - 1 threads, 50/50 read/write
+```{r}
+concurrentHash = read.csv("./results/concurrentHash-t1-r0.5.csv", header=T, dec=".")
+synchronizedMap = read.csv("./results/synchronizedMap-t1-r0.5.csv", header=T, dec=".")
+concurrentHash <- filter(concurrentHash, time_in_nanoseconds > 0)
+synchronizedMap <- filter(synchronizedMap, time_in_nanoseconds > 0)
+graph_tail_map(concurrentHash$time_in_nanoseconds, synchronizedMap$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+```
+
+## ECDF - 1 threads, 90/10 read/write
+```{r}
+concurrentHash = read.csv("./results/concurrentHash-t1-r0.9.csv", header=T, dec=".")
+synchronizedMap = read.csv("./results/synchronizedMap-t1-r0.9.csv", header=T, dec=".")
+concurrentHash <- filter(concurrentHash, time_in_nanoseconds > 0)
+synchronizedMap <- filter(synchronizedMap, time_in_nanoseconds > 0)
+graph_tail_map(concurrentHash$time_in_nanoseconds, synchronizedMap$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=1000, annotate_y=0.95)
+```
+
+## ECDF - 1 threads, 10/90 read/write
+```{r}
+concurrentHash = read.csv("./results/concurrentHash-t1-r0.1.csv", header=T, dec=".")
+synchronizedMap = read.csv("./results/synchronizedMap-t1-r0.1.csv", header=T, dec=".")
+concurrentHash <- filter(concurrentHash, time_in_nanoseconds > 0)
+synchronizedMap <- filter(synchronizedMap, time_in_nanoseconds > 0)
+graph_tail_map(concurrentHash$time_in_nanoseconds, synchronizedMap$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+```
+
+
+# Letra B
+## ECDF - 1024 threads, 50/50 read/write
+```{r}
+copyOnWriteList = read.csv("./results/copyOnWriteList-t1024-r0.5.csv", header=T, dec=".")
+synchronizedList = read.csv("./results/synchronizedList-t1024-r0.5.csv", header=T, dec=".")
+copyOnWriteList <- filter(copyOnWriteList, time_in_nanoseconds > 0)
+synchronizedList <- filter(synchronizedList, time_in_nanoseconds > 0)
+graph_tail_list(copyOnWriteList$time_in_nanoseconds, synchronizedList$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+```
+
+## ECDF - 1024 threads, 90/10 read/write
+```{r}
+copyOnWriteList = read.csv("./results/copyOnWriteList-t1024-r0.9.csv", header=T, dec=".")
+synchronizedList = read.csv("./results/synchronizedList-t1024-r0.9.csv", header=T, dec=".")
+copyOnWriteList <- filter(copyOnWriteList, time_in_nanoseconds > 0)
+synchronizedList <- filter(synchronizedList, time_in_nanoseconds > 0)
+graph_tail_list(copyOnWriteList$time_in_nanoseconds, synchronizedList$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+```
+
+## ECDF - 1024 threads, 10/90 read/write
+```{r}
+copyOnWriteList = read.csv("./results/copyOnWriteList-t1024-r0.1.csv", header=T, dec=".")
+synchronizedList = read.csv("./results/synchronizedList-t1024-r0.1.csv", header=T, dec=".")
+copyOnWriteList <- filter(copyOnWriteList, time_in_nanoseconds > 0)
+synchronizedList <- filter(synchronizedList, time_in_nanoseconds > 0)
+graph_tail_list(copyOnWriteList$time_in_nanoseconds, synchronizedList$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+```
+
+## ECDF - 128 threads, 50/50 read/write
+```{r}
+copyOnWriteList = read.csv("./results/copyOnWriteList-t128-r0.5.csv", header=T, dec=".")
+synchronizedList = read.csv("./results/synchronizedList-t128-r0.5.csv", header=T, dec=".")
+copyOnWriteList <- filter(copyOnWriteList, time_in_nanoseconds > 0)
+synchronizedList <- filter(synchronizedList, time_in_nanoseconds > 0)
+graph_tail_list(copyOnWriteList$time_in_nanoseconds, synchronizedList$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+```
+
+## ECDF - 128 threads, 90/10 read/write
+```{r}
+copyOnWriteList = read.csv("./results/copyOnWriteList-t128-r0.9.csv", header=T, dec=".")
+synchronizedList = read.csv("./results/synchronizedList-t128-r0.9.csv", header=T, dec=".")
+copyOnWriteList <- filter(copyOnWriteList, time_in_nanoseconds > 0)
+synchronizedList <- filter(synchronizedList, time_in_nanoseconds > 0)
+graph_tail_list(copyOnWriteList$time_in_nanoseconds, synchronizedList$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+```
+
+## ECDF - 128 threads, 10/90 read/write
+```{r}
+copyOnWriteList = read.csv("./results/copyOnWriteList-t128-r0.1.csv", header=T, dec=".")
+synchronizedList = read.csv("./results/synchronizedList-t128-r0.1.csv", header=T, dec=".")
+copyOnWriteList <- filter(copyOnWriteList, time_in_nanoseconds > 0)
+synchronizedList <- filter(synchronizedList, time_in_nanoseconds > 0)
+graph_tail_list(copyOnWriteList$time_in_nanoseconds, synchronizedList$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+```
+
+## ECDF - 1 threads, 50/50 read/write
+```{r}
+copyOnWriteList = read.csv("./results/copyOnWriteList-t1-r0.5.csv", header=T, dec=".")
+synchronizedList = read.csv("./results/synchronizedList-t1-r0.5.csv", header=T, dec=".")
+copyOnWriteList <- filter(copyOnWriteList, time_in_nanoseconds > 0)
+synchronizedList <- filter(synchronizedList, time_in_nanoseconds > 0)
+graph_tail_list(copyOnWriteList$time_in_nanoseconds, synchronizedList$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+```
+
+## ECDF - 1 threads, 90/10 read/write
+```{r}
+copyOnWriteList = read.csv("./results/copyOnWriteList-t1-r0.9.csv", header=T, dec=".")
+synchronizedList = read.csv("./results/synchronizedList-t1-r0.9.csv", header=T, dec=".")
+copyOnWriteList <- filter(copyOnWriteList, time_in_nanoseconds > 0)
+synchronizedList <- filter(synchronizedList, time_in_nanoseconds > 0)
+graph_tail_list(copyOnWriteList$time_in_nanoseconds, synchronizedList$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+```
+
+## ECDF - 1 threads, 10/90 read/write
+```{r}
+copyOnWriteList = read.csv("./results/copyOnWriteList-t1-r0.1.csv", header=T, dec=".")
+synchronizedList = read.csv("./results/synchronizedList-t1-r0.1.csv", header=T, dec=".")
+copyOnWriteList <- filter(copyOnWriteList, time_in_nanoseconds > 0)
+synchronizedList <- filter(synchronizedList, time_in_nanoseconds > 0)
+graph_tail_list(copyOnWriteList$time_in_nanoseconds, synchronizedList$time_in_nanoseconds,
+        title="ECDF", x_limit_inf=100, x_limit_sup=2000, annotate_y=0.95)
+```
+
