@@ -7,7 +7,8 @@ import (
 )
 
 func main(){
-	fmt.Println(gateway(10))	
+	fmt.Println(gateway(50))
+	
 }
 
 func request(c chan int) int{
@@ -17,17 +18,20 @@ func request(c chan int) int{
 	time.Sleep(time.Duration(randNumber) * time.Second)
 	//fmt.Println(randNumber, "terminou.")
 	c <- randNumber
-
 	return randNumber
 }
 
 func gateway(num_replicas int) int{
 	ch0 := make(chan int)
-	
 	for i := 0; i < num_replicas; i++ {
 		//time.Sleep(1000) //para que o seed mude 
         go request(ch0)
     }
 
-    return <-ch0
+    select {
+		case returnValue := <-ch0:
+			return returnValue
+		case <-time.Tick(8 * time.Second):
+			return -1
+	}
 }
