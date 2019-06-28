@@ -13,7 +13,7 @@ func main(){
 func request(c chan int) int{
 	rand.Seed(time.Now().UnixNano())
 	randNumber := rand.Intn(30)	+ 1
-	fmt.Println("A função irá dormir por ", randNumber, " segundos.")
+	fmt.Println("Request will sleep ", randNumber, "  seconds.")
 	time.Sleep(time.Duration(randNumber) * time.Second)
 	c <- randNumber
 	
