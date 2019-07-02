@@ -2,19 +2,18 @@ package main
 
 import (
 	"fmt"
-	"time"
 	"os"
 )
 
 func main(){
-	numberOfThreads := str(os.Args[1])
+	numberOfThreads := string(os.Args[1])
 	gateway(numberOfThreads)
 	fmt.Println("Finished")
 }
 
 func request(c chan int) {
 	numberOfSecondsToSleep := 4
-	time.Sleep(numberOfSecondsToSleep * time.Second)
+	time.Sleep(numberOfSecondsToSleep)
 	c <- numberOfSecondsToSleep
 }
 
