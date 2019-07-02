@@ -21,6 +21,7 @@ do
         echo -e "${GREEN}EXPERIMENT RUNNING: Java ${number_of_threads} threads${NC}"
         java Main ${number_of_threads} &
         pmap $! | tail -n 1 | awk '/[0-9]K/{print $2}' | sed 's/\K//g' >> results/java-${number_of_threads}.csv
+        sleep 0.1
     done;
 done;
 
@@ -33,6 +34,7 @@ do
         echo -e "${GREEN}EXPERIMENT RUNNING: Go ${number_of_goroutines} goroutines${NC}"
         go run main.go ${number_of_goroutines} &
         pmap $! | tail -n 1 | awk '/[0-9]K/{print $2}' | sed 's/\K//g' >> results/go-${number_of_goroutines}.csv
+        sleep 0.1
     done;
 done;
 
