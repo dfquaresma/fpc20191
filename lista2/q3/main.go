@@ -9,12 +9,12 @@ import (
 
 func main(){
 	numberOfThreads, _ := strconv.Atoi(os.Args[1])
-	if numberOfThreads == 0:
+	if numberOfThreads == 0 {
 		numberOfSecondsToSleep := 15
 		time.Sleep(time.Duration(numberOfSecondsToSleep) * time.Second)
-	else:
+	} else {
 		gateway(numberOfThreads)
-	
+	}
 	fmt.Println("Finished")
 }
 
