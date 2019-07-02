@@ -7,7 +7,7 @@ import (
 )
 
 func main(){
-	numberOfThreads := os.Args[1]
+	numberOfThreads := str(os.Args[1])
 	gateway(numberOfThreads)
 	fmt.Println("Finished")
 }
