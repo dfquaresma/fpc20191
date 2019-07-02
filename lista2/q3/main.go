@@ -21,19 +21,18 @@ func request(c chan int) {
 }
 
 func gateway(num_replicas int) {
-	ch0 := make(chan int)
-	
-	for i := 0; i < num_replicas; i++ {
-		go request(ch0)
+    ch0 := make(chan int)
+    for i := 0; i < num_replicas; i++ {
+	go request(ch0)
     }
-	
+
     for i := 0; i < num_replicas; i++ {
         <- ch0
     }
 }
 
 func sleep() int {
-	numberOfSecondsToSleep := 1
+	numberOfSecondsToSleep := 5
 	time.Sleep(time.Duration(numberOfSecondsToSleep) * time.Second)
 	return numberOfSecondsToSleep
 }

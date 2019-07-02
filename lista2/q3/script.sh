@@ -5,8 +5,8 @@ set -x
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-echo "NUMBER_OF_THREADS: ${NUMBER_OF_THREADS:=0 10 100 1000}"
-echo "NUMBER_OF_EXECUTION: ${NUMBER_OF_EXECUTION:=1000}"
+echo "NUMBER_OF_THREADS: ${NUMBER_OF_THREADS:=0 1 2 4 8 16 32 64 128 256 512 1024 2048 4096 8192 16384 32768}"
+echo "NUMBER_OF_EXECUTION: ${NUMBER_OF_EXECUTION:=5}"
 
 # Compiling the stuff
 javac Main.java
@@ -20,8 +20,8 @@ do
     do
         echo -e "${GREEN}EXPERIMENT RUNNING: Java ${number_of_threads} threads${NC}"
         java Main ${number_of_threads} &
-        pmap $! | tail -n 1 | awk '/[0-9]K/{print $2}' | sed 's/\K//g' >> results/java-${number_of_threads}.csv
-        sleep 0.5
+	sleep 1
+        ps v --pid=$! | tail -n 1 | awk -F " " '{ print $8 }' >> results/java-${number_of_threads}.csv
     done;
 done;
 
@@ -33,8 +33,8 @@ do
     do
         echo -e "${GREEN}EXPERIMENT RUNNING: Go ${number_of_goroutines} goroutines${NC}"
         go run main.go ${number_of_goroutines} &
-        pmap $! | tail -n 1 | awk '/[0-9]K/{print $2}' | sed 's/\K//g' >> results/go-${number_of_goroutines}.csv
-        sleep 0.5
+	sleep 1
+        ps v --pid=$! | tail -n 1 | awk -F " " '{ print $8 }' >> results/go-${number_of_goroutines}.csv
     done;
 done;
 
