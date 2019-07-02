@@ -6,7 +6,7 @@ GREEN='\033[0;32m'
 NC='\033[0m'
 
 echo "NUMBER_OF_THREADS: ${NUMBER_OF_THREADS:=0 1 128 1024}" # 2^0, 2^7, 2^10
-echo "NUMBER_OF_EXECUTION: ${NUMBER_OF_EXECUTION:=1000}" # 2^0, 2^7, 2^10
+echo "NUMBER_OF_EXECUTION: ${NUMBER_OF_EXECUTION:=1000}"
 
 # Compiling the stuff
 javac Main.java
