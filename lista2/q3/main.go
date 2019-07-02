@@ -2,30 +2,30 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
 	"time"
+	"os"
 )
 
 func main(){
-	fmt.Println(gateway(10))	
+	numberOfThreads := os.Args[1]
+	gateway(numberOfThreads)
+	fmt.Println("Finished")
 }
 
-func request(c chan int) int{
-	rand.Seed(time.Now().UnixNano())
-	randNumber := rand.Intn(30)	+ 1
-	fmt.Println("A função irá dormir por ", randNumber, " segundos.")
-	time.Sleep(time.Duration(randNumber) * time.Second)
-	c <- randNumber
-
-	return randNumber
+func request(c chan int) {
+	numberOfSecondsToSleep := 4
+	time.Sleep(numberOfSecondsToSleep * time.Second)
+	c <- numberOfSecondsToSleep
 }
 
-func gateway(num_replicas int) int{
+func gateway(num_replicas int) {
 	ch0 := make(chan int)
 	
 	for i := 0; i < num_replicas; i++ {
-        go request(ch0)
+		go request(ch0)
     }
-
-    return <-ch0
+	
+    for i := 0; i < num_replicas; i++ {
+        <- ch0
+    }
 }

@@ -3,64 +3,33 @@ import java.util.Random;
 public class Main {
 
     public static void main(String args[]) {
-        System.out.println("gateway=" + gateway(5));
+        int numberOfThreads = Integer.parseInt(args[0]);
+        gateway(numberOfThreads);
+        System.out.println("Finished");
     }
 
-    public static int gateway(int numReplicas) {
-        First first = new First();
-        Request request = new Request(first);
+    public static void gateway(int numReplicas) {
+        Request request = new Request();
+        Thread[] threads = new Thread[numReplicas];
         for (int i = 0; i < numReplicas; i++) {
             Thread thread = new Thread(request, "request" + i);
             thread.start();
+            threads[i] = thread;
         }
-    
-        synchronized (first) {
-            while (!first.isSet()) {
-                try {
-                    first.wait();
-                } catch (InterruptedException e) {}
+
+        try {
+            for (int i = 0; i < numReplicas; i++) {
+                threads[i].join();
             }
-            return first.getValue();
-        }
+        } catch (InterruptedException e) {}
     }
 
     public static class Request implements Runnable {
-        private First first;
-
-        public Request (First first) {
-            this.first = first; 
-        }
-
         public void run() {
-            int randomNumber = (new Random()).nextInt(30) + 1; // Obtain a number between [1 - 30].
             try {
-                System.out.printf("Request will sleep %d seconds.\n", randomNumber);
-                Thread.sleep(randomNumber * 1000); // Thread.sleep sleeps milliseconds
+                int numberOfSecondsToSleep = 4; 
+                Thread.sleep(numberOfSecondsToSleep * 1000); // Thread.sleep sleeps milliseconds.
             } catch (InterruptedException e) {}
-            this.first.setValue(randomNumber);
         }
     }
-
-    public static class First {
-        private boolean set;
-        private int value;
-
-        public synchronized void setValue(int value) {
-            if (!this.set) {
-                this.set = true;
-                this.value = value;
-                this.notifyAll();
-            }
-        }
-
-        public synchronized int getValue() {
-            return this.value;
-        }
-
-        public synchronized boolean isSet() {
-            return this.set;
-        }
-    }  
-
 }
-
