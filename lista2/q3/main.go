@@ -14,7 +14,7 @@ func main(){
 }
 
 func request(c chan int) {
-	numberOfSecondsToSleep := 4
+	numberOfSecondsToSleep := 15
 	time.Sleep(time.Duration(numberOfSecondsToSleep))
 	c <- numberOfSecondsToSleep
 }

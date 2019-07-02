@@ -27,7 +27,7 @@ public class Main {
     public static class Request implements Runnable {
         public void run() {
             try {
-                int numberOfSecondsToSleep = 4; 
+                int numberOfSecondsToSleep = 15; 
                 Thread.sleep(numberOfSecondsToSleep * 1000); // Thread.sleep sleeps milliseconds.
             } catch (InterruptedException e) {}
         }
