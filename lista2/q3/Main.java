@@ -36,7 +36,7 @@ public class Main {
 
     public static void sleep() {
         try {
-            int numberOfSecondsToSleep = 4; 
+            int numberOfSecondsToSleep = 1; 
             Thread.sleep(numberOfSecondsToSleep * 1000); // Thread.sleep sleeps milliseconds.
         } catch (InterruptedException e) {}
     }

@@ -35,7 +35,7 @@ func gateway(num_replicas int) {
 }
 
 func sleep() int {
-	numberOfSecondsToSleep := 4
+	numberOfSecondsToSleep := 1
 	time.Sleep(time.Duration(numberOfSecondsToSleep) * time.Second)
 	return numberOfSecondsToSleep
 }
