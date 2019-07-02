@@ -14,7 +14,6 @@ func main(){
 	} else {
 		gateway(numberOfThreads)
 	}
-	fmt.Println("Finished")
 }
 
 func request(c chan int) {

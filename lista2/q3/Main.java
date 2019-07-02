@@ -9,7 +9,6 @@ public class Main {
         } else {
             gateway(numberOfThreads);
         }
-        System.out.println("Finished");
     }
 
     public static void gateway(int numReplicas) {
