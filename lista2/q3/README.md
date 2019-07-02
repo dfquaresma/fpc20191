@@ -7,5 +7,5 @@ go run main.go numberOfThreads
 
 ## Comando para executar Main.java
 ```bash
-javac Main.java numberOfThreads && java Main && rm -rf *.class Main.java
+javac Main.java numberOfThreads && java Main && rm -rf *.class
 ```
