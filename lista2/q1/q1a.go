@@ -7,7 +7,7 @@ import (
 )
 
 func main(){
-	fmt.Println(gateway(10))	
+	fmt.Println(gateway(5))	
 }
 
 func request(c chan int) int{
