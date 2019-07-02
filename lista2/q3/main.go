@@ -18,7 +18,7 @@ func main(){
 }
 
 func request(c chan int) {
-	sleptTime = sleep()
+	sleptTime := sleep()
 	c <- sleptTime
 }
 
