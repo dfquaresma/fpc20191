@@ -2,11 +2,13 @@ package main
 
 import (
 	"fmt"
+	"time"
 	"os"
+	"strconv"
 )
 
 func main(){
-	numberOfThreads := string(os.Args[1])
+	numberOfThreads, _ := strconv.Atoi(os.Args[1])
 	gateway(numberOfThreads)
 	fmt.Println("Finished")
 }
