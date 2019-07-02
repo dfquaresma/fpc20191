@@ -4,7 +4,11 @@ public class Main {
 
     public static void main(String args[]) {
         int numberOfThreads = Integer.parseInt(args[0]);
-        gateway(numberOfThreads);
+        if (numberOfThreads == 0) {
+            sleep();
+        } else {
+            gateway(numberOfThreads);
+        }
         System.out.println("Finished");
     }
 
@@ -26,10 +30,14 @@ public class Main {
 
     public static class Request implements Runnable {
         public void run() {
-            try {
-                int numberOfSecondsToSleep = 15; 
-                Thread.sleep(numberOfSecondsToSleep * 1000); // Thread.sleep sleeps milliseconds.
-            } catch (InterruptedException e) {}
+            sleep();
         }
+    }
+
+    public static void sleep() {
+        try {
+            int numberOfSecondsToSleep = 15; 
+            Thread.sleep(numberOfSecondsToSleep * 1000); // Thread.sleep sleeps milliseconds.
+        } catch (InterruptedException e) {}
     }
 }

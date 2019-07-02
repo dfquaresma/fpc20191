@@ -10,8 +10,7 @@ import (
 func main(){
 	numberOfThreads, _ := strconv.Atoi(os.Args[1])
 	if numberOfThreads == 0 {
-		numberOfSecondsToSleep := 15
-		time.Sleep(time.Duration(numberOfSecondsToSleep) * time.Second)
+		sleep()
 	} else {
 		gateway(numberOfThreads)
 	}
@@ -19,9 +18,8 @@ func main(){
 }
 
 func request(c chan int) {
-	numberOfSecondsToSleep := 15
-	time.Sleep(time.Duration(numberOfSecondsToSleep) * time.Second)
-	c <- numberOfSecondsToSleep
+	sleptTime = sleep()
+	c <- sleptTime
 }
 
 func gateway(num_replicas int) {
@@ -34,4 +32,9 @@ func gateway(num_replicas int) {
     for i := 0; i < num_replicas; i++ {
         <- ch0
     }
+}
+
+func sleep() int {
+	numberOfSecondsToSleep := 15
+	time.Sleep(time.Duration(numberOfSecondsToSleep) * time.Second)
 }
