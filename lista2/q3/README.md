@@ -9,3 +9,5 @@ go run main.go numberOfThreads
 ```bash
 javac Main.java && java Main numberOfThreads && rm -rf *.class
 ```
+
+## [Análise dos resultados](https://github.com/dfquaresma/fpc/blob/master/lista2/q3/analysis.pdf)
