@@ -15,30 +15,28 @@ mkdir -p results/
 # Running for Java
 for number_of_threads in ${NUMBER_OF_THREADS};
 do
-    FILE_PATH=$("results/java-${number_of_threads}.csv")
-    echo "memory_size_in_K" >> ${FILE_PATH}
+    echo "memory_size_in_K" >> "results/java-${number_of_threads}.csv"
     for expid in `seq 1 ${NUMBER_OF_EXECUTION}`;
     do
         echo -e "${GREEN}EXPERIMENT RUNNING: Java ${number_of_threads} threads${NC}"
         java Main ${number_of_threads} &
 	    sleep 1
-        echo -n "${number_of_threads}," ${FILE_PATH}
-        ps v --pid=$! | tail -n 1 | awk -F " " '{ print $8 }' >> ${FILE_PATH}
+        echo -n "${number_of_threads}," "results/java-${number_of_threads}.csv"
+        ps v --pid=$! | tail -n 1 | awk -F " " '{ print $8 }' >> "results/java-${number_of_threads}.csv"
     done;
 done;
 
 # Running for Go
 for number_of_goroutines in ${NUMBER_OF_THREADS};
 do
-    FILE_PATH=$("results/go-${number_of_threads}.csv")
-    echo "memory_size_in_K" >> ${FILE_PATH}
+    echo "memory_size_in_K" >> "results/go-${number_of_threads}.csv"
     for expid in `seq 1 ${NUMBER_OF_EXECUTION}`;
     do
         echo -e "${GREEN}EXPERIMENT RUNNING: Go ${number_of_goroutines} goroutines${NC}"
         go run main.go ${number_of_goroutines} &
 	    sleep 1
-        echo -n "${number_of_goroutines}," ${FILE_PATH}
-        ps v --pid=$! | tail -n 1 | awk -F " " '{ print $8 }' >> ${FILE_PATH}
+        echo -n "${number_of_goroutines}," "results/go-${number_of_threads}.csv"
+        ps v --pid=$! | tail -n 1 | awk -F " " '{ print $8 }' >> "results/go-${number_of_threads}.csv"
     done;
 done;
 
