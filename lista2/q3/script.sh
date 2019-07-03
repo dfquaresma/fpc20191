@@ -13,9 +13,9 @@ javac Main.java
 mkdir -p results/
 
 # Running for Java
+echo "number_of_threads,memory_size_in_K" >> "results/java.csv"
 for number_of_threads in ${NUMBER_OF_THREADS};
 do
-    echo "number_of_threads,memory_size_in_K" >> "results/java.csv"
     for expid in `seq 1 ${NUMBER_OF_EXECUTION}`;
     do
         echo -e "${GREEN}EXPERIMENT RUNNING: Java ${number_of_threads} threads${NC}"
@@ -27,9 +27,9 @@ do
 done;
 
 # Running for Go
+echo "number_of_goroutines,memory_size_in_K" >> "results/go.csv"
 for number_of_goroutines in ${NUMBER_OF_THREADS};
 do
-    echo "number_of_goroutines,memory_size_in_K" >> "results/go.csv"
     for expid in `seq 1 ${NUMBER_OF_EXECUTION}`;
     do
         echo -e "${GREEN}EXPERIMENT RUNNING: Go ${number_of_goroutines} goroutines${NC}"
