@@ -15,7 +15,7 @@ mkdir -p results/
 # Running for Java
 for number_of_threads in ${NUMBER_OF_THREADS};
 do
-    FILE_PATH = "results/java-${number_of_threads}.csv"
+    FILE_PATH=$("results/java-${number_of_threads}.csv")
     echo "memory_size_in_K" >> ${FILE_PATH}
     for expid in `seq 1 ${NUMBER_OF_EXECUTION}`;
     do
@@ -30,7 +30,7 @@ done;
 # Running for Go
 for number_of_goroutines in ${NUMBER_OF_THREADS};
 do
-    FILE_PATH = "results/go-${number_of_threads}.csv"
+    FILE_PATH=$("results/go-${number_of_threads}.csv")
     echo "memory_size_in_K" >> ${FILE_PATH}
     for expid in `seq 1 ${NUMBER_OF_EXECUTION}`;
     do
