@@ -10,4 +10,4 @@ go run main.go numberOfThreads
 javac Main.java && java Main numberOfThreads && rm -rf *.class
 ```
 
-## [Análise dos resultados](https://github.com/dfquaresma/fpc/blob/master/lista2/q3/analysis.pdf)
+## [Análise dos resultados](https://github.com/dfquaresma/fpc/tree/master/lista2/q3/analysis.pdf)
