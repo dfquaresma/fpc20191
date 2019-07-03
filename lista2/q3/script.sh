@@ -6,7 +6,7 @@ GREEN='\033[0;32m'
 NC='\033[0m'
 
 echo "NUMBER_OF_THREADS: ${NUMBER_OF_THREADS:=0 1 2 4 8 16 32 64 128 256 512 1024 2048}" # 4096 8192 16384 32768}, after 4096, java throw java.lang.OutOfMemoryError.
-echo "NUMBER_OF_EXECUTION: ${NUMBER_OF_EXECUTION:=100}"
+echo "NUMBER_OF_EXECUTION: ${NUMBER_OF_EXECUTION:=1000}"
 
 # Compiling the stuff
 javac Main.java
