@@ -7,7 +7,7 @@ import (
 )
 
 func main(){
-	fmt.Println(gateway(5))
+	fmt.Println("gateway =" , gateway(5))
 }
 
 func request(c chan int) int{
@@ -27,10 +27,10 @@ func gateway(num_replicas int) int{
 		go request(ch0)
     }
 	
-	soma := 0
+	sum := 0
     for i := 0; i < num_replicas; i++ {
-        soma += <- ch0
+        sum += <- ch0
     }
 
-    return soma
+    return sum
 }
