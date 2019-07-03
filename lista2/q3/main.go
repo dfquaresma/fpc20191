@@ -8,7 +8,7 @@ import (
 
 func main(){
 	numberOfThreads, _ := strconv.Atoi(os.Args[1])
-	if numberOfThreads == 0 {
+	if numberOfThreads == 0 { // to evaluate memory with only one goroutine
 		sleep()
 	} else {
 		gateway(numberOfThreads)

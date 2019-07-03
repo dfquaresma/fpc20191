@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String args[]) {
         int numberOfThreads = Integer.parseInt(args[0]);
-        if (numberOfThreads == 0) {
+        if (numberOfThreads == 0) {  // to evaluate memory with only one thread
             sleep();
         } else {
             gateway(numberOfThreads);
